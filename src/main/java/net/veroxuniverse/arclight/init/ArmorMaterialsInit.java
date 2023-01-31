@@ -23,7 +23,7 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
             () -> {return Ingredient.of(Items.NETHERITE_INGOT);
             }),
 
-    FROZEN("frozen", 30, new int[]{4, 6, 8, 4}, 25,
+    SNOWFALL("snowfall", 30, new int[]{4, 6, 8, 4}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.3F,
             () -> {return Ingredient.of(Items.NETHERITE_INGOT);
             }),

@@ -19,6 +19,6 @@ public class AngelSwordModel extends AnimatedGeoModel<AngelSwordItem> {
 
     @Override
     public ResourceLocation getAnimationResource(AngelSwordItem animatable) {
-        return new ResourceLocation(ArclightMod.MODID, "animations/item_animation.json");
+        return null; // new ResourceLocation(ArclightMod.MODID, "animations/item_animation.json");
     }
 }
