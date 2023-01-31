@@ -1,0 +1,17 @@
+{
+  //Items
+  "item.arclight.angel_sword": "Angel Sword",
+
+  //Blocks
+
+  //ArmorItems
+
+  //CreativeTabs
+  "itemGroup.arclight_group": "Arclight",
+  "itemGroup.arclight_mobs": "Arclight Mobs",
+  "itemGroup.arclight_resources": "Arclight Resources",
+  "itemGroup.arclight_building": "Arclight Building"
+
+  //Enities
+
+}
