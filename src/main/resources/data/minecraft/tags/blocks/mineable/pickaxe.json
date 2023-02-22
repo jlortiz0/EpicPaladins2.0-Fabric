@@ -1,0 +1,13 @@
+{
+  "values": [
+    "arclight:arclight_ore",
+    "arclight:arclight_block",
+    "arclight:jade_ore",
+    "arclight:jade_block",
+    "arclight:moonlight_ore",
+    "arclight:moonlight_block",
+    "arclight:bloodstone_ore",
+    "arclight:bloodstone_block",
+    "arclight:cryorium_ore"
+  ]
+}

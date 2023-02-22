@@ -167,7 +167,7 @@
 				},
 				{
 					"name": "guard_part_one",
-					"parent": "paladin_sword",
+					"parent": "angel_sword",
 					"pivot": [0, 15, 3],
 					"rotation": [20, 0, 0],
 					"cubes": [
@@ -213,7 +213,7 @@
 				},
 				{
 					"name": "guard_part_two",
-					"parent": "paladin_sword",
+					"parent": "angel_sword",
 					"pivot": [0, 15, -3],
 					"rotation": [-160, 0, 180],
 					"cubes": [

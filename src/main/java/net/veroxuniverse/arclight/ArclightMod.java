@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.veroxuniverse.arclight.init.BlocksInit;
 import net.veroxuniverse.arclight.init.ItemsInit;
 import org.slf4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -25,6 +26,7 @@ public class ArclightMod {
         GeckoLib.initialize();
 
         ItemsInit.register(modEventBus);
+        BlocksInit.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);

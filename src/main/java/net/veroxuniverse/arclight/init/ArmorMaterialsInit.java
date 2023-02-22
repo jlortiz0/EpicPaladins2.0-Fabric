@@ -23,7 +23,7 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
             () -> {return Ingredient.of(Items.NETHERITE_INGOT);
             }),
 
-    SNOWFALL("snowfall", 30, new int[]{4, 6, 8, 4}, 25,
+    CRYO("cryo", 30, new int[]{4, 6, 8, 4}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.3F,
             () -> {return Ingredient.of(Items.NETHERITE_INGOT);
             }),
@@ -33,12 +33,12 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
             () -> {return Ingredient.of(Items.NETHERITE_INGOT);
             }),
 
-    DRAGONSCALE("dragonscale", 50, new int[]{6, 10, 13, 6}, 25,
+    SCORPIONSCALE("scorpionscale", 50, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 5.0F, 0.3F,
             () -> {return Ingredient.of(Items.NETHERITE_INGOT);
             }),
 
-    HOLYKNIGHT("holyknight", 30, new int[]{3, 6, 8, 3}, 25,
+    COPPER("copper", 30, new int[]{3, 6, 8, 3}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.2F,
             () -> {return Ingredient.of(Items.NETHERITE_INGOT);
             });
