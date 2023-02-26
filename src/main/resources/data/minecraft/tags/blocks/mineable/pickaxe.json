@@ -8,6 +8,12 @@
     "arclight:moonlight_block",
     "arclight:bloodstone_ore",
     "arclight:bloodstone_block",
-    "arclight:cryorium_ore"
+    "arclight:cryorium_ore",
+    "arclight:cryorium_block",
+    "arclight:deepslate_cryorium_ore",
+    "arclight:deepslate_arclight_ore",
+    "arclight:deepslate_bloodstone_ore",
+    "arclight:pedestal_block",
+    "arclight:armor_forge"
   ]
 }

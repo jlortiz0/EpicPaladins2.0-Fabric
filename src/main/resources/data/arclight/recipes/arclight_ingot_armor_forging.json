@@ -1,0 +1,11 @@
+{
+  "type": "arclight:armor_forging",
+  "ingredients": [
+    {
+      "item": "arclight:arclight_gem"
+    }
+  ],
+  "output": {
+    "item": "arclight:arclight_ingot"
+  }
+}

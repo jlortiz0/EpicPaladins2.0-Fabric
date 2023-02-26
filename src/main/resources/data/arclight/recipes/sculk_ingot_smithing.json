@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:echo_shard"
+  },
+  "base": {
+    "item": "minecraft:copper_ingot"
+  },
+  "result": {
+    "item": "arclight:sculk_ingot"
+  }
+}

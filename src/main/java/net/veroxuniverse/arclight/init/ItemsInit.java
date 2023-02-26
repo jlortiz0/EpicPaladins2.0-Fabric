@@ -1,8 +1,7 @@
 package net.veroxuniverse.arclight.init;
 
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,6 +23,21 @@ public class ItemsInit {
     public static final RegistryObject<Item> MOONLIGHT_GLAIVE = ITEMS.register("moonlight_glaive",
             () -> new MoonlightGlaiveItem(ItemMaterialsInit.MOONLIGHT, 6, -3.0f,
                     new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB).rarity(Rarity.EPIC)));
+
+    //Cores
+
+    public static final RegistryObject<Item> ARCLIGHT_CORE = ITEMS.register("arclight_core",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MOONLIGHT_CORE = ITEMS.register("moonlight_core",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SCORPION_CORE = ITEMS.register("scorpion_core",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> CRYORIUM_CORE = ITEMS.register("cryorium_core",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> JADE_CORE = ITEMS.register("jade_core",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SCULK_CORE = ITEMS.register("sculk_core",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).rarity(Rarity.RARE)));
 
 
     //Resources
@@ -55,6 +69,10 @@ public class ItemsInit {
     public static final RegistryObject<Item> HEART = ITEMS.register("heart",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> SCORPION_SCALE = ITEMS.register("scorpion_scale",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
+    public static final RegistryObject<Item> ANGEL_FEATHER = ITEMS.register("angel_feather",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
+    public static final RegistryObject<Item> SCULK_INGOT = ITEMS.register("sculk_ingot",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
 
     //Armor
@@ -99,6 +117,58 @@ public class ItemsInit {
             () -> new CopperArmorItem(ArmorMaterialsInit.COPPER, EquipmentSlot.LEGS, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
     public static final RegistryObject<Item> COPPERKNIGHT_BOOTS = ITEMS.register("copperknight_boots",
             () -> new CopperArmorItem(ArmorMaterialsInit.COPPER, EquipmentSlot.FEET, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+
+    //Tools
+
+    public static final RegistryObject<Item> ARCLIGHT_SWORD = ITEMS.register("arclight_sword",
+            () -> new SwordItem(ItemMaterialsInit.ARCLIGHT,2,-2.4f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ARCLIGHT_PICKAXE = ITEMS.register("arclight_pickaxe",
+            () -> new PickaxeItem(ItemMaterialsInit.ARCLIGHT,0,-2.8f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ARCLIGHT_AXE = ITEMS.register("arclight_axe",
+            () -> new AxeItem(ItemMaterialsInit.ARCLIGHT,4,-3f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ARCLIGHT_SHOVEL = ITEMS.register("arclight_shovel",
+            () -> new ShovelItem(ItemMaterialsInit.ARCLIGHT,0,-3f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ARCLIGHT_HOE = ITEMS.register("arclight_hoe",
+            () -> new HoeItem(ItemMaterialsInit.ARCLIGHT,-4,0f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+
+    public static final RegistryObject<Item> JADE_SWORD = ITEMS.register("jade_sword",
+            () -> new SwordItem(ItemMaterialsInit.JADE,3,-2.4f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> JADE_PICKAXE = ITEMS.register("jade_pickaxe",
+            () -> new PickaxeItem(ItemMaterialsInit.JADE,1,-2.8f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> JADE_AXE = ITEMS.register("jade_axe",
+            () -> new AxeItem(ItemMaterialsInit.JADE,5,-3f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> JADE_SHOVEL = ITEMS.register("jade_shovel",
+            () -> new ShovelItem(ItemMaterialsInit.JADE,1,-3f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> JADE_HOE = ITEMS.register("jade_hoe",
+            () -> new HoeItem(ItemMaterialsInit.JADE,-4,0f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+
+    public static final RegistryObject<Item> MOONLIGHT_SWORD = ITEMS.register("moonlight_sword",
+            () -> new SwordItem(ItemMaterialsInit.MOONLIGHT,3,-2.4f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> MOONLIGHT_PICKAXE = ITEMS.register("moonlight_pickaxe",
+            () -> new PickaxeItem(ItemMaterialsInit.MOONLIGHT,1,-2.8f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> MOONLIGHT_AXE = ITEMS.register("moonlight_axe",
+            () -> new AxeItem(ItemMaterialsInit.MOONLIGHT,5,-3f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> MOONLIGHT_SHOVEL = ITEMS.register("moonlight_shovel",
+            () -> new ShovelItem(ItemMaterialsInit.MOONLIGHT,1,-2.8f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> MOONLIGHT_HOE = ITEMS.register("moonlight_hoe",
+            () -> new HoeItem(ItemMaterialsInit.MOONLIGHT,-3,0f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+
+    public static final RegistryObject<Item> BLOODSTONE_SWORD = ITEMS.register("bloodstone_sword",
+            () -> new SwordItem(ItemMaterialsInit.BLOODSTONE,2,-2.4f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> BLOODSTONE_PICKAXE = ITEMS.register("bloodstone_pickaxe",
+            () -> new PickaxeItem(ItemMaterialsInit.BLOODSTONE,0,-2.8f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> BLOODSTONE_AXE = ITEMS.register("bloodstone_axe",
+            () -> new AxeItem(ItemMaterialsInit.BLOODSTONE,1,-3f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> BLOODSTONE_SHOVEL = ITEMS.register("bloodstone_shovel",
+            () -> new ShovelItem(ItemMaterialsInit.BLOODSTONE,0,-3f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> BLOODSTONE_HOE = ITEMS.register("bloodstone_hoe",
+            () -> new HoeItem(ItemMaterialsInit.BLOODSTONE,-4,0f, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+
+    //Blocks
+
+    public static final RegistryObject<Item> PEDESTAL_BLOCK_ITEM = ITEMS.register("pedestal_block",
+            () -> new PedestalBlockItem(BlocksInit.PEDESTAL_BLOCK.get(),
+                    new Item.Properties().tab(ArclightModCreativeTabs.BUILDING_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

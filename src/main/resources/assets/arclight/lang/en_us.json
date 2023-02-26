@@ -1,5 +1,6 @@
 {
   //Items
+
   "item.arclight.angel_sword": "Angel Sword",
   "item.arclight.moonlight_glaive": "Moonlight Glaive",
   "item.arclight.arclight_gem": "Arclight",
@@ -16,10 +17,19 @@
   "item.arclight.scorpion_scale": "Scorpion Scale",
   "item.arclight.cryorium_gem": "Cryorium",
   "item.arclight.cryorium_ingot": "Cryorium Alloy",
+  "item.arclight.angel_feather": "Angel's Feather",
+  "item.arclight.arclight_core": "Arclight Core",
+  "item.arclight.moonlight_core": "Moonlight Core",
+  "item.arclight.scorpion_core": "Scorpion Core",
+  "item.arclight.cryorium_core": "Cryorium Core",
+  "item.arclight.jade_core": "Jade Core",
+  "item.arclight.sculk_core": "Sculk Core",
+  "item.arclight.sculk_ingot": "Sculk Alloy",
 
   //Blocks
 
   "block.arclight.arclight_ore": "Arclight Ore",
+  "block.arclight.deepslate_arclight_ore": "Deepslate Arclight Ore",
   "block.arclight.arclight_block": "Block of Arclight",
   "block.arclight.jade_block": "Block of Jade",
   "block.arclight.moonlight_block": "Block of Moonlight",
@@ -27,8 +37,15 @@
   "block.arclight.moonlight_ore": "Moonlight Ore",
   "block.arclight.jade_ore": "Jade Ore",
   "block.arclight.bloodstone_ore": "Bloodstone Ore",
+  "block.arclight.deepslate_bloodstone_ore": "Deepslate Bloodstone Ore",
   "block.arclight.cryorium_ore": "Cryorium Ore",
+  "block.arclight.deepslate_cryorium_ore": "Deepslate Cryorium Ore",
   "block.arclight.cryorium_block": "Block of Cryorium",
+
+  //Altar3DBlocks
+  "block.arclight.pedestal_block": "Deepslate Pedestal WIP",
+  "block.arclight.armor_forge": "Paladin Forge",
+
 
   //ArmorItems
 
@@ -53,8 +70,32 @@
   "item.arclight.copperknight_leggings": "Knight Leggings",
   "item.arclight.copperknight_boots": "Knight Boots",
 
+  //Tools
+
+  "item.arclight.moonlight_pickaxe": "Moonlight Pickaxe",
+  "item.arclight.moonlight_axe": "Moonlight Axe",
+  "item.arclight.moonlight_shovel": "Moonlight Shovel",
+  "item.arclight.moonlight_hoe": "Moonlight Hoe",
+  "item.arclight.moonlight_sword": "Moonlight Sword",
+  "item.arclight.jade_pickaxe": "Jade Pickaxe",
+  "item.arclight.jade_axe": "Jade Axe",
+  "item.arclight.jade_shovel": "Jade Shovel",
+  "item.arclight.jade_hoe": "Jade Hoe",
+  "item.arclight.jade_sword": "Jade Sword",
+  "item.arclight.arclight_pickaxe": "Arclight Pickaxe",
+  "item.arclight.arclight_axe": "Arclight Axe",
+  "item.arclight.arclight_shovel": "Arclight Shovel",
+  "item.arclight.arclight_hoe": "Arclight Hoe",
+  "item.arclight.arclight_sword": "Arclight Sword",
+  "item.arclight.bloodstone_pickaxe": "Bloodstone Pickaxe",
+  "item.arclight.bloodstone_axe": "Bloodstone Axe",
+  "item.arclight.bloodstone_shovel": "Bloodstone Shovel",
+  "item.arclight.bloodstone_hoe": "Bloodstone Hoe",
+  "item.arclight.bloodstone_sword": "Bloodstone Sword",
+
   //CreativeTabs
-  "itemGroup.arclight_group": "Arclight Weaponary",
+
+  "itemGroup.arclight_group": "Arclight Weaponry",
   "itemGroup.arclight_mobs": "Arclight Mobs",
   "itemGroup.arclight_resources": "Arclight Resources",
   "itemGroup.arclight_building": "Arclight Building"

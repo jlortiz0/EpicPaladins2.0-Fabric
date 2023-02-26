@@ -1,0 +1,11 @@
+{
+  "type": "arclight:armor_forging",
+  "ingredients": [
+    {
+      "item": "arclight:moonlight_crystal"
+    }
+  ],
+  "output": {
+    "item": "arclight:moonlight_ingot"
+  }
+}

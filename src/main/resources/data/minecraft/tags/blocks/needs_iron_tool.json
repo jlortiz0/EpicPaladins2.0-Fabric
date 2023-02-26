@@ -3,6 +3,9 @@
     "arclight:arclight_block",
     "arclight:bloodstone_block",
     "arclight:moonlight_block",
-    "arclight:jade_block"
+    "arclight:jade_block",
+    "arclight:cryorium_block",
+    "arclight:pedestal_block",
+    "arclight:armor_forge"
   ]
 }
