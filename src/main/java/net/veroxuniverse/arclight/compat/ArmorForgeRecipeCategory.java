@@ -17,6 +17,8 @@ import net.veroxuniverse.arclight.recipe.ArmorForgeRecipe;
 
 public class ArmorForgeRecipeCategory implements IRecipeCategory<ArmorForgeRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(ArclightMod.MODID, "armor_forging");
+    public static final RecipeType<ArmorForgeRecipe> RECIPE_TYPE = RecipeType.create(ArclightMod.MODID, "armor_forging", ArmorForgeRecipe.class);
+
     public final static ResourceLocation TEXTURE =
             new ResourceLocation(ArclightMod.MODID, "textures/gui/armor_forge_gui.png");
 
