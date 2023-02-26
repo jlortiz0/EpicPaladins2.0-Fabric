@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.veroxuniverse.arclight.block.PedestalBlockEntity;
+import net.veroxuniverse.arclight.block.entities.PedestalBlockEntity;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
 import javax.annotation.Nullable;

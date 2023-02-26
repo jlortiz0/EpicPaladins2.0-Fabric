@@ -2,7 +2,7 @@ package net.veroxuniverse.arclight.client.customblocks.PedestalBlock;
 
 import net.minecraft.resources.ResourceLocation;
 import net.veroxuniverse.arclight.ArclightMod;
-import net.veroxuniverse.arclight.block.PedestalBlockEntity;
+import net.veroxuniverse.arclight.block.entities.PedestalBlockEntity;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class PedestalBlockModel extends AnimatedGeoModel<PedestalBlockEntity> {

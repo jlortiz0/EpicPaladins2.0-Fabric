@@ -6,7 +6,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.veroxuniverse.arclight.ArclightMod;
-import net.veroxuniverse.arclight.block.PedestalBlockEntity;
 import net.veroxuniverse.arclight.init.BlocksInit;
 
 public class ModBlockEntities {

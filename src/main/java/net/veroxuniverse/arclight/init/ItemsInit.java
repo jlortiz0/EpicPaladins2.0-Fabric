@@ -54,10 +54,14 @@ public class ItemsInit {
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> MOONLIGHT_INGOT = ITEMS.register("moonlight_ingot",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
-    public static final RegistryObject<Item> MOONLIGHT_JELLYBALL = ITEMS.register("moonlight_jellyball",
+   /*
+
+   public static final RegistryObject<Item> MOONLIGHT_JELLYBALL = ITEMS.register("moonlight_jellyball",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> MOONLIGHT_CRYSTALIZED = ITEMS.register("moonlight_crystalized",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
+
+    */
     public static final RegistryObject<Item> BLOODSTONE_GEM = ITEMS.register("bloodstone_gem",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> BLOODSTONE_INGOT = ITEMS.register("bloodstone_ingot",
@@ -68,11 +72,11 @@ public class ItemsInit {
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> HEART = ITEMS.register("heart",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
+    public static final RegistryObject<Item> SCULK_INGOT = ITEMS.register("sculk_ingot",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> SCORPION_SCALE = ITEMS.register("scorpion_scale",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> ANGEL_FEATHER = ITEMS.register("angel_feather",
-            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
-    public static final RegistryObject<Item> SCULK_INGOT = ITEMS.register("sculk_ingot",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
 
     //Armor

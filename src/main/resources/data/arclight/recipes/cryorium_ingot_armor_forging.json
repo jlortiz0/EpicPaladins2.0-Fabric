@@ -1,7 +1,7 @@
 {
   "type": "arclight:armor_forging",
   "input": {
-    "item": "arclight:arclight_gem"
+    "item": "arclight:cryorium_gem"
   },
 
   "addition1": {
@@ -11,6 +11,6 @@
     "item": "minecraft:gold_ingot"
   },
   "output": {
-    "item": "arclight:arclight_ingot"
+    "item": "arclight:cryorium_ingot"
   }
 }

@@ -1,10 +1,15 @@
 {
   "type": "arclight:armor_forging",
-  "ingredients": [
-    {
-      "item": "arclight:moonlight_crystal"
-    }
-  ],
+  "input": {
+    "item": "arclight:moonlight_crystal"
+  },
+
+  "addition1": {
+    "item": "minecraft:copper_ingot"
+  },
+  "addition2": {
+    "item": "minecraft:gold_ingot"
+  },
   "output": {
     "item": "arclight:moonlight_ingot"
   }

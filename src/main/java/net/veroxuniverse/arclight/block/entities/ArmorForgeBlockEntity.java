@@ -20,7 +20,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.veroxuniverse.arclight.init.ItemsInit;
 import net.veroxuniverse.arclight.recipe.ArmorForgeRecipe;
 import net.veroxuniverse.arclight.screen.ArmorForgeMenu;
 import org.jetbrains.annotations.NotNull;

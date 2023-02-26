@@ -1,6 +1,6 @@
 package net.veroxuniverse.arclight.recipe;
 
-import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -31,8 +31,8 @@ public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
         if(pLevel.isClientSide()) {
             return false;
         }
-
-        return recipeItems.get(0).test(pContainer.getItem(0));
+        return recipeItems.get(0).test(pContainer.getItem(0)) && recipeItems.get(1).test(pContainer.getItem(1))
+                && recipeItems.get(2).test(pContainer.getItem(2));
     }
 
     @Override
@@ -85,13 +85,27 @@ public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
         public ArmorForgeRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
 
-            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+            //removed, no longer searching for an array
+            //JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
+            NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
 
-            for (int i = 0; i < inputs.size(); i++) {
+            //removing, we are no longer checking an input array
+            /*for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-            }
+            }*/
 
+            //instead simply manually insert each ingredient at the proper index:
+
+            JsonElement jsonInput = pSerializedRecipe.get("input");
+            inputs.set(0,Ingredient.fromJson(jsonInput));
+
+            JsonElement jsonAddition1 = pSerializedRecipe.get("addition1");
+            inputs.set(1,Ingredient.fromJson(jsonAddition1));
+
+            JsonElement jsonAddition2 = pSerializedRecipe.get("addition2");
+            inputs.set(2,Ingredient.fromJson(jsonAddition2));
+
+            Ingredient input = Ingredient.fromJson(jsonInput);
             return new ArmorForgeRecipe(pRecipeId, output, inputs);
         }
 

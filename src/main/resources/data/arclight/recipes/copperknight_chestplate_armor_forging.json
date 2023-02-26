@@ -1,16 +1,16 @@
 {
   "type": "arclight:armor_forging",
   "input": {
-    "item": "arclight:arclight_gem"
+    "item": "minecraft:iron_chestplate"
   },
 
   "addition1": {
     "item": "minecraft:copper_ingot"
   },
   "addition2": {
-    "item": "minecraft:gold_ingot"
+    "item": "minecraft:diamond"
   },
   "output": {
-    "item": "arclight:arclight_ingot"
+    "item": "arclight:copperknight_chestplate"
   }
 }
