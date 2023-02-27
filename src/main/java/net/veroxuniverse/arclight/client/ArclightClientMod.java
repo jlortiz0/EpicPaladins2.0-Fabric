@@ -9,8 +9,10 @@ import net.veroxuniverse.arclight.block.entities.ModBlockEntities;
 import net.veroxuniverse.arclight.client.customarmors.ArclightArmor.ArclightArmorRenderer;
 import net.veroxuniverse.arclight.client.customarmors.CopperKnight.CopperKnightArmorRenderer;
 import net.veroxuniverse.arclight.client.customarmors.CryoriumArmor.CryoriumArmorRenderer;
+import net.veroxuniverse.arclight.client.customarmors.JadeArmor.JadeArmorRenderer;
 import net.veroxuniverse.arclight.client.customarmors.MoonlightArmor.MoonlightArmorRenderer;
 import net.veroxuniverse.arclight.client.customarmors.ScorpionArmor.ScorpionArmorRenderer;
+import net.veroxuniverse.arclight.client.customarmors.SculkArmor.SculkArmorRenderer;
 import net.veroxuniverse.arclight.client.customblocks.PedestalBlock.PedestalBlockRenderer;
 import net.veroxuniverse.arclight.client.customitems.PedestalBlockItem.PedestalBlockItemRenderer;
 import net.veroxuniverse.arclight.item.*;
@@ -32,6 +34,8 @@ public class ArclightClientMod {
         GeoArmorRenderer.registerArmorRenderer(ScorpionArmorItem.class, new ScorpionArmorRenderer());
         GeoArmorRenderer.registerArmorRenderer(CopperArmorItem.class, new CopperKnightArmorRenderer());
         GeoArmorRenderer.registerArmorRenderer(CryoArmorItem.class, new CryoriumArmorRenderer());
+        GeoArmorRenderer.registerArmorRenderer(JadeArmorItem.class, new JadeArmorRenderer());
+        GeoArmorRenderer.registerArmorRenderer(SculkArmorItem.class, new SculkArmorRenderer());
     }
 }
 

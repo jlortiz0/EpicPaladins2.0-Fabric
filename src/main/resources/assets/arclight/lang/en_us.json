@@ -71,6 +71,14 @@
   "item.arclight.copperknight_chestplate": "Knight Chestplate",
   "item.arclight.copperknight_leggings": "Knight Leggings",
   "item.arclight.copperknight_boots": "Knight Boots",
+  "item.arclight.jade_helmet": "Jade Helmet",
+  "item.arclight.jade_chestplate": "Jade Chestplate",
+  "item.arclight.jade_leggings": "Jade Leggings",
+  "item.arclight.jade_boots": "Jade Boots",
+  "item.arclight.sculk_helmet": "Sculk Helmet",
+  "item.arclight.sculk_chestplate": "Sculk Chestplate",
+  "item.arclight.sculk_leggings": "Sculk Leggings",
+  "item.arclight.sculk_boots": "Sculk Boots",
 
   //Tools
 
@@ -94,6 +102,16 @@
   "item.arclight.bloodstone_shovel": "Bloodstone Shovel",
   "item.arclight.bloodstone_hoe": "Bloodstone Hoe",
   "item.arclight.bloodstone_sword": "Bloodstone Sword",
+  "item.arclight.sculk_pickaxe": "Sculk Pickaxe",
+  "item.arclight.sculk_axe": "Sculk Axe",
+  "item.arclight.sculk_shovel": "Sculk Shovel",
+  "item.arclight.sculk_hoe": "Sculk Hoe",
+  "item.arclight.sculk_sword": "Sculk Sword",
+  "item.arclight.cryorium_pickaxe": "Cryorium Pickaxe",
+  "item.arclight.cryorium_axe": "Cryorium Axe",
+  "item.arclight.cryorium_shovel": "Cryorium Shovel",
+  "item.arclight.cryorium_hoe": "Cryorium Hoe",
+  "item.arclight.cryorium_sword": "Cryorium Sword",
 
   //CreativeTabs
 
