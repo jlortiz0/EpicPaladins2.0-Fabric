@@ -8,7 +8,7 @@
     "item": "arclight:bloodstone_ingot"
   },
   "addition2": {
-    "item": "arclight:scorpion_scale"
+    "item": "minecraft:netherite_ingot"
   },
   "output": {
     "item": "arclight:scorpion_core"

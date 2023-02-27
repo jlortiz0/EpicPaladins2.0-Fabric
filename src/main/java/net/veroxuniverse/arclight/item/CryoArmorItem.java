@@ -26,7 +26,7 @@ public class CryoArmorItem extends GeoArmorItem implements IAnimatable {
 
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ArmorMaterialsInit.CRYO, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false)).build();
+                    .put(ArmorMaterialsInit.CRYO, new MobEffectInstance(MobEffects.WATER_BREATHING, 200, 1, false, false)).build();
 
     public CryoArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
         super(material, slot, settings);

@@ -26,7 +26,7 @@ public class CopperArmorItem extends GeoArmorItem implements IAnimatable {
 
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ArmorMaterialsInit.COPPER, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false)).build();
+                    .put(ArmorMaterialsInit.COPPER, new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false)).build();
 
     public CopperArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
         super(material, slot, settings);

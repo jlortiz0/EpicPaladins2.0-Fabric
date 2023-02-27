@@ -45,7 +45,7 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
 
     SCORPIONSCALE("scorpionscale", 50, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 5.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.SCORPION_SCALE.get());
+            () -> {return Ingredient.of(ItemsInit.BLOODSTONE_INGOT.get());
             }),
 
     COPPER("copper", 30, new int[]{3, 6, 8, 3}, 25,

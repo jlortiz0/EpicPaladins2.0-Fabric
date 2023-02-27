@@ -26,7 +26,7 @@ public class SculkArmorItem extends GeoArmorItem implements IAnimatable {
 
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ArmorMaterialsInit.SCULK, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false)).build();
+                    .put(ArmorMaterialsInit.SCULK, new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1, false, false)).build();
 
     public SculkArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
         super(material, slot, settings);

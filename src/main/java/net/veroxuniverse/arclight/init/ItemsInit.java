@@ -70,14 +70,16 @@ public class ItemsInit {
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> CRYORIUM_INGOT = ITEMS.register("cryorium_ingot",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
-    public static final RegistryObject<Item> HEART = ITEMS.register("heart",
-            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> SCULK_INGOT = ITEMS.register("sculk_ingot",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
+   /*
+    public static final RegistryObject<Item> HEART = ITEMS.register("heart",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> SCORPION_SCALE = ITEMS.register("scorpion_scale",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> ANGEL_FEATHER = ITEMS.register("angel_feather",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
+    */
 
     //Armor
 
