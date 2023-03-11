@@ -28,6 +28,10 @@ public class SculkArmorItem extends GeoArmorItem implements IAnimatable {
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
                     .put(ArmorMaterialsInit.SCULK, new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1, false, false)).build();
 
+    private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP2 =
+            (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
+                    .put(ArmorMaterialsInit.SCULK, new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 1, false, false)).build();
+
     public SculkArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
         super(material, slot, settings);
     }
@@ -61,6 +65,14 @@ public class SculkArmorItem extends GeoArmorItem implements IAnimatable {
         for (Map.Entry<ArmorMaterial, MobEffectInstance> entry : MATERIAL_TO_EFFECT_MAP.entrySet()) {
             ArmorMaterial mapArmorMaterial = entry.getKey();
             MobEffectInstance mapStatusEffect = entry.getValue();
+
+            if(hasCorrectArmorOn(mapArmorMaterial, player)) {
+                addStatusEffectForMaterial(player, mapArmorMaterial, mapStatusEffect);
+            }
+        }
+        for (Map.Entry<ArmorMaterial, MobEffectInstance> entry2 : MATERIAL_TO_EFFECT_MAP2.entrySet()) {
+            ArmorMaterial mapArmorMaterial = entry2.getKey();
+            MobEffectInstance mapStatusEffect = entry2.getValue();
 
             if(hasCorrectArmorOn(mapArmorMaterial, player)) {
                 addStatusEffectForMaterial(player, mapArmorMaterial, mapStatusEffect);

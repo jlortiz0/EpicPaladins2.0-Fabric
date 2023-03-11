@@ -23,13 +23,6 @@ public class ArclightModCreativeTabs {
         }
     };
 
-    public static final CreativeModeTab MOB_TAB = new CreativeModeTab("arclight_mobs") {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(Items.SPAWNER);
-        }
-    };
-
     public static final CreativeModeTab ARCLIGHT_TAB = new CreativeModeTab("arclight_group") {
         @Override
         public ItemStack makeIcon() {

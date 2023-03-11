@@ -39,7 +39,7 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
 
     protected final ContainerData data;
     private int progress = 0;
-    private  int maxProgress = 400;
+    private  int maxProgress = 900;
 
     public ArmorForgeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ARMOR_BLOCK_ENTIY.get(), pos, state);

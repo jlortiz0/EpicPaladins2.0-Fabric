@@ -3,6 +3,7 @@
 
   "item.arclight.angel_sword": "Angel Sword",
   "item.arclight.moonlight_glaive": "Moonlight Glaive",
+  "item.arclight.cryorium_battle_axe": "Cryorium Battle-Axe",
   "item.arclight.arclight_gem": "Arclight",
   "item.arclight.arclight_ingot": "Arclight Alloy",
   "item.arclight.jade_gem": "Jade",
@@ -11,12 +12,12 @@
   "item.arclight.bloodstone_ingot": "Bloodstone Alloy",
   "item.arclight.moonlight_crystal": "Moonlight",
   "item.arclight.moonlight_ingot": "Moonlight Alloy",
+  "item.arclight.angel_feather": "Angel's Feather",
   /*
   "item.arclight.moonlight_jellyball": "Moonlight Jelly",
   "item.arclight.moonlight_crystalized": "Moonlight Crystal",
   "item.arclight.heart": "Scorpion Heart",
   "item.arclight.scorpion_scale": "Scorpion Scale",
-  "item.arclight.angel_feather": "Angel's Feather",
   */
   "item.arclight.cryorium_gem": "Cryorium",
   "item.arclight.cryorium_ingot": "Cryorium Alloy",
@@ -45,7 +46,7 @@
   "block.arclight.cryorium_block": "Block of Cryorium",
 
   //Altar3DBlocks
-  "block.arclight.pedestal_block": "Deepslate Pedestal WIP",
+  "block.arclight.pedestal_block": "Deepslate Pedestal",
   "block.arclight.armor_forge": "Paladin Forge",
 
 
@@ -67,10 +68,10 @@
   "item.arclight.cryo_chestplate": "Cryorium Chestplate",
   "item.arclight.cryo_leggings": "Cryorium Leggings",
   "item.arclight.cryo_boots": "Cryorium Boots",
-  "item.arclight.copperknight_helmet": "Knight Helmet",
-  "item.arclight.copperknight_chestplate": "Knight Chestplate",
-  "item.arclight.copperknight_leggings": "Knight Leggings",
-  "item.arclight.copperknight_boots": "Knight Boots",
+  "item.arclight.copperknight_helmet": "Copper Knight Helmet",
+  "item.arclight.copperknight_chestplate": "Copper Knight Chestplate",
+  "item.arclight.copperknight_leggings": "Copper Knight Leggings",
+  "item.arclight.copperknight_boots": "Copper Knight Boots",
   "item.arclight.jade_helmet": "Jade Helmet",
   "item.arclight.jade_chestplate": "Jade Chestplate",
   "item.arclight.jade_leggings": "Jade Leggings",
@@ -79,6 +80,23 @@
   "item.arclight.sculk_chestplate": "Sculk Chestplate",
   "item.arclight.sculk_leggings": "Sculk Leggings",
   "item.arclight.sculk_boots": "Sculk Boots",
+  "item.arclight.steel_helmet": "Steel Knight Helmet",
+  "item.arclight.steel_chestplate": "Steel Knight Chestplate",
+  "item.arclight.steel_leggings": "Steel Knight Leggings",
+  "item.arclight.steel_boots": "Steel Knight Boots",
+  "item.arclight.shadow_helmet": "Shadow Helmet",
+  "item.arclight.shadow_chestplate": "Shadow Chestplate",
+  "item.arclight.shadow_leggings": "Shadow Leggings",
+  "item.arclight.shadow_boots": "Shadow Boots",
+  "item.arclight.angel_helmet": "Angel Helmet",
+  "item.arclight.angel_chestplate": "Angel Chestplate",
+  "item.arclight.angel_leggings": "Angel Leggings",
+  "item.arclight.angel_boots": "Angel Boots",
+
+  //Entity
+  "item.arclight.angel_spawn_egg": "Angel Spawn Egg",
+  "item.arclight.angel_spawn": "Arclight Crown",
+  "entity.arclight.angel": "Arclight Angel",
 
   //Tools
 
@@ -116,10 +134,7 @@
   //CreativeTabs
 
   "itemGroup.arclight_group": "Arclight Weaponry",
-  "itemGroup.arclight_mobs": "Arclight Mobs",
   "itemGroup.arclight_resources": "Arclight Resources",
   "itemGroup.arclight_building": "Arclight Building"
-
-  //Enities
 
 }

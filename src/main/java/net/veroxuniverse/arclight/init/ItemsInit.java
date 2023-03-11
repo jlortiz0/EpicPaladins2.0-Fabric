@@ -2,11 +2,13 @@ package net.veroxuniverse.arclight.init;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.veroxuniverse.arclight.ArclightMod;
+import net.veroxuniverse.arclight.entity.EntityTypes;
 import net.veroxuniverse.arclight.item.*;
 import net.veroxuniverse.arclight.util.ArclightModCreativeTabs;
 
@@ -23,8 +25,12 @@ public class ItemsInit {
     public static final RegistryObject<Item> MOONLIGHT_GLAIVE = ITEMS.register("moonlight_glaive",
             () -> new MoonlightGlaiveItem(ItemMaterialsInit.MOONLIGHT, 6, -3.0f,
                     new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB).rarity(Rarity.EPIC)));
+ public static final RegistryObject<Item> CRYORIUM_BATTLE_AXE = ITEMS.register("cryorium_battle_axe",
+         () -> new CryoriumAxeItem(ItemMaterialsInit.CRYORIUM, 8, -3.0f,
+                 new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB).rarity(Rarity.EPIC)));
 
-    //Cores
+
+ //Cores
 
     public static final RegistryObject<Item> ARCLIGHT_CORE = ITEMS.register("arclight_core",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).rarity(Rarity.RARE)));
@@ -77,11 +83,17 @@ public class ItemsInit {
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     public static final RegistryObject<Item> SCORPION_SCALE = ITEMS.register("scorpion_scale",
             () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
-    public static final RegistryObject<Item> ANGEL_FEATHER = ITEMS.register("angel_feather",
-            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
     */
 
-    //Armor
+    public static final RegistryObject<Item> ANGEL_FEATHER = ITEMS.register("angel_feather",
+            () -> new Item(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB)));
+    public static final RegistryObject<Item> ANGEL_SPAWN = ITEMS.register("angel_spawn",
+            () -> new AngelSpawnItem(new Item.Properties().tab(ArclightModCreativeTabs.RESOURCES_TAB).durability(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> ANGEL_SPAWN_EGG = ITEMS.register("angel_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.ANGEL, 0xE1EF05, 0x6FF2FA,new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+
+
+ //Armor
 
     public static final RegistryObject<Item> ARCLIGHTS_HELMET = ITEMS.register("arclight_helmet",
             () -> new ArclightArmorItem(ArmorMaterialsInit.ARCLIGHT, EquipmentSlot.HEAD, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
@@ -139,6 +151,31 @@ public class ItemsInit {
             () -> new JadeArmorItem(ArmorMaterialsInit.JADE, EquipmentSlot.LEGS, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
     public static final RegistryObject<Item> JADE_BOOTS = ITEMS.register("jade_boots",
             () -> new JadeArmorItem(ArmorMaterialsInit.JADE, EquipmentSlot.FEET, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> STEEL_HELMET = ITEMS.register("steel_helmet",
+            () -> new SteelArmorItem(ArmorMaterialsInit.STEEL, EquipmentSlot.HEAD, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> STEEL_CHESTLATE = ITEMS.register("steel_chestplate",
+            () -> new SteelArmorItem(ArmorMaterialsInit.STEEL, EquipmentSlot.CHEST, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> STEEL_LEGGINGS = ITEMS.register("steel_leggings",
+            () -> new SteelArmorItem(ArmorMaterialsInit.STEEL, EquipmentSlot.LEGS, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> STEEL_BOOTS = ITEMS.register("steel_boots",
+            () -> new SteelArmorItem(ArmorMaterialsInit.STEEL, EquipmentSlot.FEET, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> SHADOW_HELMET = ITEMS.register("shadow_helmet",
+            () -> new ShadowArmorItem(ArmorMaterialsInit.SHADOW, EquipmentSlot.HEAD, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> SHADOW_CHESTLATE = ITEMS.register("shadow_chestplate",
+            () -> new ShadowArmorItem(ArmorMaterialsInit.SHADOW, EquipmentSlot.CHEST, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> SHADOW_LEGGINGS = ITEMS.register("shadow_leggings",
+            () -> new ShadowArmorItem(ArmorMaterialsInit.SHADOW, EquipmentSlot.LEGS, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> SHADOW_BOOTS = ITEMS.register("shadow_boots",
+            () -> new ShadowArmorItem(ArmorMaterialsInit.SHADOW, EquipmentSlot.FEET, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ANGEL_HELMET = ITEMS.register("angel_helmet",
+            () -> new AngelWingItem(ArmorMaterialsInit.ANGEL, EquipmentSlot.HEAD, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ANGEL_CHESTPLATE = ITEMS.register("angel_chestplate",
+            () -> new AngelWingItem(ArmorMaterialsInit.ANGEL, EquipmentSlot.CHEST, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ANGEL_LEGGINGS = ITEMS.register("angel_leggings",
+            () -> new AngelWingItem(ArmorMaterialsInit.ANGEL, EquipmentSlot.LEGS, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+    public static final RegistryObject<Item> ANGEL_BOOTS = ITEMS.register("angel_boots",
+            () -> new AngelWingItem(ArmorMaterialsInit.ANGEL, EquipmentSlot.FEET, new Item.Properties().tab(ArclightModCreativeTabs.ARCLIGHT_TAB)));
+
 
     //Tools
 

@@ -2,6 +2,7 @@ package net.veroxuniverse.arclight;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -10,6 +11,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.veroxuniverse.arclight.block.entities.ModBlockEntities;
+import net.veroxuniverse.arclight.entity.EntityTypes;
+import net.veroxuniverse.arclight.entity.client.AngelRenderer;
 import net.veroxuniverse.arclight.init.BlocksInit;
 import net.veroxuniverse.arclight.init.ItemsInit;
 import net.veroxuniverse.arclight.recipe.ModRecipes;
@@ -43,6 +46,8 @@ public class ArclightMod {
         ItemsInit.register(modEventBus);
         BlocksInit.register(modEventBus);
 
+        EntityTypes.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -58,6 +63,7 @@ public class ArclightMod {
         public static void onClientSetup(FMLClientSetupEvent event){
 
             MenuScreens.register(ModMenuTypes.ARMOR_FORGE_MENU.get(), ArmorForgeScreen::new);
+            EntityRenderers.register(EntityTypes.ANGEL.get(), AngelRenderer::new);
         }
     }
 

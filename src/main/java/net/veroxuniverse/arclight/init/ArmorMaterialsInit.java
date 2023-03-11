@@ -18,9 +18,9 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
             () -> {return Ingredient.of(ItemsInit.ARCLIGHT_INGOT.get());
             }),
 
-    ANGEL("angel", -1, new int[]{9, 15, 20, 9}, 30,
+    ANGEL("angel", -1, new int[]{7, 12, 15, 7}, 30,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 7.0F, 0.5F,
-            () -> {return Ingredient.of(ItemsInit.ARCLIGHT_INGOT.get());
+            () -> {return Ingredient.of(ItemsInit.ANGEL_FEATHER.get());
             }),
 
     CRYO("cryo", 45, new int[]{6, 10, 13, 6}, 25,
@@ -29,6 +29,11 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
             }),
 
     MOONLIGHT("moonlight", 45, new int[]{6, 10, 13, 6}, 25,
+            SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
+            () -> {return Ingredient.of(ItemsInit.MOONLIGHT_INGOT.get());
+            }),
+
+    SHADOW("shadow", 45, new int[]{4, 7, 9, 3}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
             () -> {return Ingredient.of(ItemsInit.MOONLIGHT_INGOT.get());
             }),
@@ -51,7 +56,12 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
     COPPER("copper", 30, new int[]{3, 6, 8, 3}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.2F,
             () -> {return Ingredient.of(Items.COPPER_INGOT);
-            });
+            }),
+
+    STEEL("steel", 30, new int[]{3, 6, 8, 3}, 25,
+            SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.2F,
+            () -> {return Ingredient.of(Items.IRON_INGOT);
+    });
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;
