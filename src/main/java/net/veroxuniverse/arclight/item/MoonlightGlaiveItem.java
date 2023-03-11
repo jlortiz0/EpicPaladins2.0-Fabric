@@ -5,7 +5,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.veroxuniverse.arclight.client.customitems.MoonlightGlaive.MoonlightGlaiveRenderer;
+import net.veroxuniverse.arclight.client.custom_items.moonlight_glaive.MoonlightGlaiveRenderer;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -18,13 +19,13 @@ import java.util.function.Consumer;
 
 public class MoonlightGlaiveItem extends SwordItem implements IAnimatable {
 
-    public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     public MoonlightGlaiveItem(Tier toolMaterial, int attackDamage, float attackSpeed, Item.Properties settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
             private final BlockEntityWithoutLevelRenderer renderer = new MoonlightGlaiveRenderer();
@@ -42,12 +43,12 @@ public class MoonlightGlaiveItem extends SwordItem implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this, "controller",
+        animationData.addAnimationController(new AnimationController<>(this, "controller",
                 0, this::predicate));
     }
 
     @Override
     public AnimationFactory getFactory() {
-        return this.factory;
+        return this.FACTORY;
     }
 }

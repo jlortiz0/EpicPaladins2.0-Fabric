@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.veroxuniverse.arclight.ArclightMod;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
@@ -27,7 +28,7 @@ public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
+    public boolean matches(@NotNull SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) {
             return false;
         }
@@ -36,12 +37,12 @@ public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         return recipeItems;
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer pContainer) {
+    public @NotNull ItemStack assemble(@NotNull SimpleContainer pContainer) {
         return output;
     }
 
@@ -51,22 +52,22 @@ public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public @NotNull ItemStack getResultItem() {
         return output.copy();
     }
 
     @Override
-    public ResourceLocation getId() {
+    public @NotNull ResourceLocation getId() {
         return id;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return Serializer.INSTANCE;
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public @NotNull RecipeType<?> getType() {
         return Type.INSTANCE;
     }
 
@@ -82,7 +83,7 @@ public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
                 new ResourceLocation(ArclightMod.MODID, "armor_forging");
 
         @Override
-        public ArmorForgeRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+        public @NotNull ArmorForgeRecipe fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
 
             //removed, no longer searching for an array
@@ -105,12 +106,11 @@ public class ArmorForgeRecipe implements Recipe<SimpleContainer> {
             JsonElement jsonAddition2 = pSerializedRecipe.get("addition2");
             inputs.set(2,Ingredient.fromJson(jsonAddition2));
 
-            Ingredient input = Ingredient.fromJson(jsonInput);
             return new ArmorForgeRecipe(pRecipeId, output, inputs);
         }
 
         @Override
-        public @Nullable ArmorForgeRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @Nullable ArmorForgeRecipe fromNetwork(@NotNull ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {

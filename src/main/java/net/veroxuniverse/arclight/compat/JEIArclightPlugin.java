@@ -15,17 +15,18 @@ import net.veroxuniverse.arclight.ArclightMod;
 import net.veroxuniverse.arclight.init.BlocksInit;
 import net.veroxuniverse.arclight.recipe.ArmorForgeRecipe;
 import net.veroxuniverse.arclight.screen.ArmorForgeScreen;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
 
 @JeiPlugin
 public class JEIArclightPlugin implements IModPlugin {
-    public static RecipeType<ArmorForgeRecipe> INFUSION_TYPE =
+    public static final RecipeType<ArmorForgeRecipe> INFUSION_TYPE =
             new RecipeType<>(ArmorForgeRecipeCategory.UID, ArmorForgeRecipe.class);
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return new ResourceLocation(ArclightMod.MODID, "jei_plugin");
     }
 

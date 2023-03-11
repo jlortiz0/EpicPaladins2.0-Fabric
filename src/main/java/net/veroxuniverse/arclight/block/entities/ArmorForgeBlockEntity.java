@@ -69,13 +69,13 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.literal("Paladin Forge");
     }
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
         return new ArmorForgeMenu(id, inventory, this, this.data);
     }
 
@@ -109,7 +109,7 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("armor_forge.progress");
@@ -121,7 +121,8 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
 
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+        if (this.level != null)
+            Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ArmorForgeBlockEntity pEntity) {
@@ -155,17 +156,19 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
             inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(ArmorForgeRecipe.Type.INSTANCE, inventory, level);
+        if (level != null) {
+            Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
+                    .getRecipeFor(ArmorForgeRecipe.Type.INSTANCE, inventory, level);
 
-        if (hasRecipe(pEntity)){
-            pEntity.itemHandler.extractItem(0, 1, false);
-            pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.extractItem(2, 1, false);
-            pEntity.itemHandler.setStackInSlot(3, new ItemStack(recipe.get().getResultItem().getItem(),
-                    pEntity.itemHandler.getStackInSlot(3).getCount() + 1));
+            if (hasRecipe(pEntity) && recipe.isPresent()) {
+                pEntity.itemHandler.extractItem(0, 1, false);
+                pEntity.itemHandler.extractItem(1, 1, false);
+                pEntity.itemHandler.extractItem(2, 1, false);
+                pEntity.itemHandler.setStackInSlot(3, new ItemStack(recipe.get().getResultItem().getItem(),
+                        pEntity.itemHandler.getStackInSlot(3).getCount() + 1));
 
-            pEntity.resetProgress();
+                pEntity.resetProgress();
+            }
         }
     }
 
@@ -176,12 +179,14 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
             inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(ArmorForgeRecipe.Type.INSTANCE, inventory, level);
-        
-        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
-                canInsertIntoOutputSlot(inventory, recipe.get().getResultItem());
+        if (level != null) {
+            Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
+                    .getRecipeFor(ArmorForgeRecipe.Type.INSTANCE, inventory, level);
 
+            return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
+                    canInsertIntoOutputSlot(inventory, recipe.get().getResultItem());
+        }
+        return false;
     }
 
     private static boolean canInsertIntoOutputSlot(SimpleContainer inventory, ItemStack stack) {

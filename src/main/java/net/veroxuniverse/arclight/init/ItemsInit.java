@@ -12,6 +12,7 @@ import net.veroxuniverse.arclight.entity.EntityTypes;
 import net.veroxuniverse.arclight.item.*;
 import net.veroxuniverse.arclight.util.ArclightModCreativeTabs;
 
+@SuppressWarnings("unused")
 public class ItemsInit {
 
     public static final DeferredRegister<Item> ITEMS =

@@ -2,12 +2,12 @@ package net.veroxuniverse.arclight.init;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.veroxuniverse.arclight.ArclightMod;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -15,53 +15,43 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
 
     ARCLIGHT("arclight", 45, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.ARCLIGHT_INGOT.get());
-            }),
+            () -> Ingredient.of(ItemsInit.ARCLIGHT_INGOT.get())),
 
     ANGEL("angel", -1, new int[]{7, 12, 15, 7}, 30,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 7.0F, 0.5F,
-            () -> {return Ingredient.of(ItemsInit.ANGEL_FEATHER.get());
-            }),
+            () -> Ingredient.of(ItemsInit.ANGEL_FEATHER.get())),
 
     CRYO("cryo", 45, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.CRYORIUM_INGOT.get());
-            }),
+            () -> Ingredient.of(ItemsInit.CRYORIUM_INGOT.get())),
 
     MOONLIGHT("moonlight", 45, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.MOONLIGHT_INGOT.get());
-            }),
+            () -> Ingredient.of(ItemsInit.MOONLIGHT_INGOT.get())),
 
     SHADOW("shadow", 45, new int[]{4, 7, 9, 3}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.MOONLIGHT_INGOT.get());
-            }),
+            () -> Ingredient.of(ItemsInit.MOONLIGHT_INGOT.get())),
 
     JADE("jade", 45, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.JADE_INGOT.get());
-            }),
+            () -> Ingredient.of(ItemsInit.JADE_INGOT.get())),
 
     SCULK("sculk", 50, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 5.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.SCULK_INGOT.get());
-            }),
+            () -> Ingredient.of(ItemsInit.SCULK_INGOT.get())),
 
     SCORPIONSCALE("scorpionscale", 50, new int[]{6, 10, 13, 6}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 5.0F, 0.3F,
-            () -> {return Ingredient.of(ItemsInit.BLOODSTONE_INGOT.get());
-            }),
+            () -> Ingredient.of(ItemsInit.BLOODSTONE_INGOT.get())),
 
     COPPER("copper", 30, new int[]{3, 6, 8, 3}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.2F,
-            () -> {return Ingredient.of(Items.COPPER_INGOT);
-            }),
+            () -> Ingredient.of(Items.COPPER_INGOT)),
 
     STEEL("steel", 30, new int[]{3, 6, 8, 3}, 25,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.2F,
-            () -> {return Ingredient.of(Items.IRON_INGOT);
-    });
+            () -> Ingredient.of(Items.IRON_INGOT));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;
@@ -71,18 +61,18 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
     private final SoundEvent sound;
     private final float toughness;
     private final float knockbackResistance;
-    private final LazyLoadedValue<Ingredient> repairIngredient;
+    private final Supplier<Ingredient> repairIngredient;
 
-    ArmorMaterialsInit(String p_40474_, int p_40475_, int[] p_40476_, int p_40477_,
-                      SoundEvent p_40478_, float p_40479_, float p_40480_, Supplier<Ingredient> p_40481_) {
-        this.name = p_40474_;
-        this.durabilityMultiplier = p_40475_;
-        this.slotProtections = p_40476_;
-        this.enchantmentValue = p_40477_;
-        this.sound = p_40478_;
-        this.toughness = p_40479_;
-        this.knockbackResistance = p_40480_;
-        this.repairIngredient = new LazyLoadedValue<>(p_40481_);
+    ArmorMaterialsInit(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue,
+                      SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+        this.name = name;
+        this.durabilityMultiplier = durabilityMultiplier;
+        this.slotProtections = slotProtections;
+        this.enchantmentValue = enchantmentValue;
+        this.sound = sound;
+        this.toughness = toughness;
+        this.knockbackResistance = knockbackResistance;
+        this.repairIngredient = repairIngredient;
     }
 
     public int getDurabilityForSlot(EquipmentSlot pSlot) {
@@ -97,15 +87,15 @@ public enum ArmorMaterialsInit implements ArmorMaterial {
         return this.enchantmentValue;
     }
 
-    public SoundEvent getEquipSound() {
+    public @NotNull SoundEvent getEquipSound() {
         return this.sound;
     }
 
-    public Ingredient getRepairIngredient() {
+    public @NotNull Ingredient getRepairIngredient() {
         return this.repairIngredient.get();
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return ArclightMod.MODID + ":" + this.name;
     }
 

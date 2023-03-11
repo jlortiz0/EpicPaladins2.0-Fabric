@@ -10,6 +10,7 @@ import net.veroxuniverse.arclight.ArclightMod;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class ModPlacedFeatures {
     public static final DeferredRegister<PlacedFeature> PLACED_FEATURES =
             DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, ArclightMod.MODID);

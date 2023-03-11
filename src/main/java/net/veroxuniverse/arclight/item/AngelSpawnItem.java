@@ -5,7 +5,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -15,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.veroxuniverse.arclight.entity.EntityTypes;
 import net.veroxuniverse.arclight.entity.custom.AngelEntity;
 import net.veroxuniverse.arclight.init.BlocksInit;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -25,12 +25,10 @@ public class AngelSpawnItem extends Item {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext pContext) {
+    public @NotNull InteractionResult useOn(UseOnContext pContext) {
         Block blockBelow = null;
         if (!pContext.getLevel().isClientSide()) {
             BlockPos positionClicked = pContext.getClickedPos();
-            Player player = pContext.getPlayer();
-            boolean foundBlock = false;
 
             for (int i = 0; i <= positionClicked.getY() + 2; i++) {
                 blockBelow = pContext.getLevel().getBlockState(positionClicked.below(i)).getBlock();
@@ -38,14 +36,16 @@ public class AngelSpawnItem extends Item {
                 if (isValuableBlock(blockBelow)) {
                     Level level = pContext.getLevel();
                     AngelEntity spawnAngel = EntityTypes.ANGEL.get().create(level);
-                    spawnAngel.setPos(positionClicked.getX() + 0, positionClicked.getY() + 15, positionClicked.getZ() + 0);
-                    level.addFreshEntity(spawnAngel);
+                    if (spawnAngel != null) {
+                        spawnAngel.setPos(positionClicked.getX(), positionClicked.getY() + 15, positionClicked.getZ());
+                        level.addFreshEntity(spawnAngel);
+                    }
                     break;
                 }
             }
         }
 
-        if (isValuableBlock(blockBelow)) {
+        if (isValuableBlock(blockBelow) && pContext.getPlayer() != null) {
             pContext.getItemInHand().hurtAndBreak(1, pContext.getPlayer(),
                     (player) -> player.broadcastBreakEvent(player.getUsedItemHand()));
         }
@@ -54,7 +54,7 @@ public class AngelSpawnItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
         if(Screen.hasShiftDown()) {
             components.add(Component.literal("Right click on Deepslate Pedestal to summon the Boss!").withStyle(ChatFormatting.DARK_PURPLE));
         } else {

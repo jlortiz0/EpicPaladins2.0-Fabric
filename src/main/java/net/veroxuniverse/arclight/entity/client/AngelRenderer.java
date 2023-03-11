@@ -16,7 +16,7 @@ public class AngelRenderer extends GeoEntityRenderer<AngelEntity> {
         this.shadowRadius = 0.3f;
     }
 
-    public ResourceLocation getTextureResource(AngelEntity instance) {
+    public ResourceLocation getTextureResource() {
         return new ResourceLocation(ArclightMod.MODID, "textures/entity/angel/angel.png");
     }
 
