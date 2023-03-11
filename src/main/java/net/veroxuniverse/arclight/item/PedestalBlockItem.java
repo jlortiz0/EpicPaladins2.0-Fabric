@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.veroxuniverse.arclight.client.customitems.AngelSword.AngelSwordRenderer;
-import net.veroxuniverse.arclight.client.customitems.PedestalBlockItem.PedestalBlockItemRenderer;
+import net.veroxuniverse.arclight.client.custom_items.pedestal_block_item.PedestalBlockItemRenderer;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -17,7 +17,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public class PedestalBlockItem extends BlockItem implements IAnimatable {
-    public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     public PedestalBlockItem(Block block, Properties settings) {
         super(block, settings);
@@ -28,7 +28,7 @@ public class PedestalBlockItem extends BlockItem implements IAnimatable {
         return PlayState.STOP;
     }
 
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
             private final BlockEntityWithoutLevelRenderer renderer = new PedestalBlockItemRenderer();
@@ -41,12 +41,12 @@ public class PedestalBlockItem extends BlockItem implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this, "controller",
+        animationData.addAnimationController(new AnimationController<>(this, "controller",
                 0, this::predicate));
     }
 
     @Override
     public AnimationFactory getFactory() {
-        return this.factory;
+        return this.FACTORY;
     }
 }

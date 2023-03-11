@@ -22,7 +22,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.Map;
 
 public class JadeArmorItem extends GeoArmorItem implements IAnimatable {
-    public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
@@ -38,13 +38,13 @@ public class JadeArmorItem extends GeoArmorItem implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this, "controller",
+        animationData.addAnimationController(new AnimationController<>(this, "controller",
                 0, this::predicate));
     }
 
     @Override
     public AnimationFactory getFactory() {
-        return this.factory;
+        return this.FACTORY;
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {

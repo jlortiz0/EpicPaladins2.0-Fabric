@@ -3,7 +3,6 @@ package net.veroxuniverse.arclight.block.entities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.veroxuniverse.arclight.block.entities.ModBlockEntities;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -13,7 +12,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class PedestalBlockEntity extends BlockEntity implements IAnimatable {
-    public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     public PedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.PEDESTAL_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
@@ -21,7 +20,7 @@ public class PedestalBlockEntity extends BlockEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this, "controller",
+        animationData.addAnimationController(new AnimationController<>(this, "controller",
                 0, this::predicate));
     }
 
@@ -32,6 +31,6 @@ public class PedestalBlockEntity extends BlockEntity implements IAnimatable {
 
     @Override
     public AnimationFactory getFactory() {
-        return this.factory;
+        return this.FACTORY;
     }
 }

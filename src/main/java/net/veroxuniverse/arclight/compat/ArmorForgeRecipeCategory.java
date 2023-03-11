@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.veroxuniverse.arclight.ArclightMod;
 import net.veroxuniverse.arclight.init.BlocksInit;
 import net.veroxuniverse.arclight.recipe.ArmorForgeRecipe;
+import org.jetbrains.annotations.NotNull;
 
 public class ArmorForgeRecipeCategory implements IRecipeCategory<ArmorForgeRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(ArclightMod.MODID, "armor_forging");
@@ -31,27 +32,27 @@ public class ArmorForgeRecipeCategory implements IRecipeCategory<ArmorForgeRecip
     }
 
     @Override
-    public RecipeType<ArmorForgeRecipe> getRecipeType() {
+    public @NotNull RecipeType<ArmorForgeRecipe> getRecipeType() {
         return JEIArclightPlugin.INFUSION_TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.literal("Paladin Forge");
     }
 
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return this.background;
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return this.icon;
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, ArmorForgeRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, ArmorForgeRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 86, 15).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 48, 20).addIngredients(recipe.getIngredients().get(1));
         builder.addSlot(RecipeIngredientRole.INPUT, 48, 40).addIngredients(recipe.getIngredients().get(2));

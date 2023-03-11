@@ -8,7 +8,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -26,7 +25,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -34,13 +32,16 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
@@ -57,7 +58,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         this.entityData.set(DATA_ID_INV, p_31511_);
     }
 
-    private static final EntityDataAccessor<Integer> DATA_ID_INV = SynchedEntityData.defineId(WitherBoss.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_ID_INV = SynchedEntityData.defineId(AngelEntity.class, EntityDataSerializers.INT);
     private static final int INVULNERABLE_TICKS = 220;
     private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
@@ -69,7 +70,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
     BlockPos anchorPoint = BlockPos.ZERO;
     AttackPhase attackPhase = AttackPhase.CIRCLE;
 
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     public AngelEntity(EntityType<? extends FlyingMob> entityType, Level level) {
         super(entityType, level);
@@ -79,7 +80,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         this.lookControl = new AngelLookControl(this);
     }
 
-    public void readAdditionalSaveData(CompoundTag p_31474_) {
+    public void readAdditionalSaveData(@NotNull CompoundTag p_31474_) {
         super.readAdditionalSaveData(p_31474_);
         this.setInvulnerableTicks(p_31474_.getInt("Invul"));
         if (this.hasCustomName()) {
@@ -109,31 +110,26 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
     }
 
-    public AgeableMob getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
-        return null;
-    }
-
     public boolean isFlapping() {
         return (this.getUniqueFlapTickOffset() + this.tickCount) % TICKS_PER_FLAP == 0;
     }
 
-    protected BodyRotationControl createBodyControl() {
+    protected @NotNull BodyRotationControl createBodyControl() {
         return new AngelBodyRotationControl(this);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("move", true));
-            return PlayState.CONTINUE;
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("move", ILoopType.EDefaultLoopTypes.LOOP));
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", ILoopType.EDefaultLoopTypes.LOOP));
         }
-
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));
         return PlayState.CONTINUE;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller",
+        data.addAnimationController(new AnimationController<>(this, "controller",
                 0, this::predicate));
     }
 
@@ -155,7 +151,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         return this.entityData.get(ID_SIZE);
     }
 
-    public void onSyncedDataUpdated(EntityDataAccessor<?> p_33134_) {
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> p_33134_) {
         if (ID_SIZE.equals(p_33134_)) {
             this.updateAngelSizeInfo();
         }
@@ -171,15 +167,15 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         return true;
     }
 
-    protected float getStandingEyeHeight(Pose p_33136_, EntityDimensions p_33137_) {
+    protected float getStandingEyeHeight(@NotNull Pose p_33136_, EntityDimensions p_33137_) {
         return p_33137_.height * 0.35F;
     }
 
     public void tick() {
         super.tick();
         if (this.level.isClientSide) {
-            float f = Mth.cos((float)(this.getUniqueFlapTickOffset() + this.tickCount) * 7.448451F * ((float)Math.PI / 180F) + (float)Math.PI);
-            float f1 = Mth.cos((float)(this.getUniqueFlapTickOffset() + this.tickCount + 1) * 7.448451F * ((float)Math.PI / 180F) + (float)Math.PI);
+            float f = Mth.cos((float)(this.getUniqueFlapTickOffset() + this.tickCount) * FLAP_DEGREES_PER_TICK * ((float)Math.PI / 180F) + (float)Math.PI);
+            float f1 = Mth.cos((float)(this.getUniqueFlapTickOffset() + this.tickCount + 1) * FLAP_DEGREES_PER_TICK * ((float)Math.PI / 180F) + (float)Math.PI);
             if (f > 0.0F && f1 <= 0.0F) {
                 this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENDER_DRAGON_FLAP, this.getSoundSource(), 0.95F + this.random.nextFloat() * 0.05F, 0.95F + this.random.nextFloat() * 0.05F, false);
             }
@@ -199,13 +195,13 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33126_, DifficultyInstance p_33127_, MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_, @Nullable CompoundTag p_33130_) {
+    public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor p_33126_, @NotNull DifficultyInstance p_33127_, @NotNull MobSpawnType p_33128_, @Nullable SpawnGroupData p_33129_, @Nullable CompoundTag p_33130_) {
         this.anchorPoint = this.blockPosition().above(5);
         this.setAngelSize(1);
         return super.finalizeSpawn(p_33126_, p_33127_, p_33128_, p_33129_, p_33130_);
     }
 
-    public void addAdditionalSaveData(CompoundTag p_33141_) {
+    public void addAdditionalSaveData(@NotNull CompoundTag p_33141_) {
         super.addAdditionalSaveData(p_33141_);
         p_33141_.putInt("AX", this.anchorPoint.getX());
         p_33141_.putInt("AY", this.anchorPoint.getY());
@@ -219,10 +215,10 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
 
     @Override
     public AnimationFactory getFactory() {
-        return this.factory;
+        return this.FACTORY;
     }
 
-    protected void playStepSound(BlockPos pos, BlockState blockIn) {
+    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState blockIn) {
         this.playSound(SoundEvents.ENDER_DRAGON_FLAP, 0.15F, 1.0F);
     }
 
@@ -230,7 +226,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         return SoundEvents.WITHER_AMBIENT;
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSourceIn) {
         return SoundEvents.WITHER_HURT;
     }
 
@@ -242,20 +238,20 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         return 0.2F;
     }
 
-    public boolean canAttackType(EntityType<?> p_33111_) {
+    public boolean canAttackType(@NotNull EntityType<?> p_33111_) {
         return true;
     }
 
-    public EntityDimensions getDimensions(Pose p_33113_) {
+    public @NotNull EntityDimensions getDimensions(@NotNull Pose p_33113_) {
         int i = this.getAngelSize();
         EntityDimensions entitydimensions = super.getDimensions(p_33113_);
-        float f = (entitydimensions.width + 1.0F * (float)i) / entitydimensions.width;
+        float f = (entitydimensions.width + (float)i) / entitydimensions.width;
         return entitydimensions.scale(f);
     }
 
-    static enum AttackPhase {
+    enum AttackPhase {
         CIRCLE,
-        SWOOP;
+        SWOOP
     }
 
     class AngelAttackPlayerTargetGoal extends Goal {
@@ -265,7 +261,6 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         public boolean canUse() {
             if (this.nextScanTick > 0) {
                 --this.nextScanTick;
-                return false;
             } else {
                 this.nextScanTick = reducedTickDelay(60);
                 List<Player> list = AngelEntity.this.level.getNearbyPlayers(this.attackTargeting, AngelEntity.this, AngelEntity.this.getBoundingBox().inflate(16.0D, 64.0D, 16.0D));
@@ -279,14 +274,13 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
                         }
                     }
                 }
-
-                return false;
             }
+            return false;
         }
 
         public boolean canContinueToUse() {
             LivingEntity livingentity = AngelEntity.this.getTarget();
-            return livingentity != null ? AngelEntity.this.canAttack(livingentity, TargetingConditions.DEFAULT) : false;
+            return livingentity != null && AngelEntity.this.canAttack(livingentity, TargetingConditions.DEFAULT);
         }
     }
 
@@ -295,7 +289,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
 
         public boolean canUse() {
             LivingEntity livingentity = AngelEntity.this.getTarget();
-            return livingentity != null ? AngelEntity.this.canAttack(livingentity, TargetingConditions.DEFAULT) : false;
+            return livingentity != null && AngelEntity.this.canAttack(livingentity, TargetingConditions.DEFAULT);
         }
 
         public void start() {
@@ -322,9 +316,11 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         }
 
         private void setAnchorAboveTarget() {
-            AngelEntity.this.anchorPoint = AngelEntity.this.getTarget().blockPosition().above(20 + AngelEntity.this.random.nextInt(20));
-            if (AngelEntity.this.anchorPoint.getY() < AngelEntity.this.level.getSeaLevel()) {
-                AngelEntity.this.anchorPoint = new BlockPos(AngelEntity.this.anchorPoint.getX(), AngelEntity.this.level.getSeaLevel() + 1, AngelEntity.this.anchorPoint.getZ());
+            if (AngelEntity.this.getTarget() != null) {
+                AngelEntity.this.anchorPoint = AngelEntity.this.getTarget().blockPosition().above(20 + AngelEntity.this.random.nextInt(20));
+                if (AngelEntity.this.anchorPoint.getY() < AngelEntity.this.level.getSeaLevel()) {
+                    AngelEntity.this.anchorPoint = new BlockPos(AngelEntity.this.anchorPoint.getX(), AngelEntity.this.level.getSeaLevel() + 1, AngelEntity.this.anchorPoint.getZ());
+                }
             }
 
         }
@@ -398,11 +394,11 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
             }
 
             this.angle += this.clockwise * 15.0F * ((float)Math.PI / 180F);
-            AngelEntity.this.moveTargetPoint = Vec3.atLowerCornerOf(AngelEntity.this.anchorPoint).add((double)(this.distance * Mth.cos(this.angle)), (double)(-4.0F + this.height), (double)(this.distance * Mth.sin(this.angle)));
+            AngelEntity.this.moveTargetPoint = Vec3.atLowerCornerOf(AngelEntity.this.anchorPoint).add(this.distance * Mth.cos(this.angle), -4.0F + this.height, this.distance * Mth.sin(this.angle));
         }
     }
 
-    class AngelLookControl extends LookControl {
+    static class AngelLookControl extends LookControl {
         public AngelLookControl(Mob p_33235_) {
             super(p_33235_);
         }
@@ -485,8 +481,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
             } else if (!livingentity.isAlive()) {
                 return false;
             } else {
-                if (livingentity instanceof Player) {
-                    Player player = (Player)livingentity;
+                if (livingentity instanceof Player player) {
                     if (livingentity.isSpectator() || player.isCreative()) {
                         return false;
                     }
@@ -496,7 +491,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
                     return false;
                 } else {
                     if (AngelEntity.this.tickCount > this.catSearchTick) {
-                        this.catSearchTick = AngelEntity.this.tickCount + 20;
+                        this.catSearchTick = AngelEntity.this.tickCount + CAT_SEARCH_TICK_DELAY;
                         List<Cat> list = AngelEntity.this.level.getEntitiesOfClass(Cat.class, AngelEntity.this.getBoundingBox().inflate(16.0D), EntitySelector.ENTITY_STILL_ALIVE);
 
                         for(Cat cat : list) {
@@ -515,7 +510,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         }
 
         public void stop() {
-            AngelEntity.this.setTarget((LivingEntity)null);
+            AngelEntity.this.setTarget(null);
             AngelEntity.this.attackPhase = AttackPhase.CIRCLE;
         }
 
@@ -523,7 +518,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
             LivingEntity livingentity = AngelEntity.this.getTarget();
             if (livingentity != null) {
                 AngelEntity.this.moveTargetPoint = new Vec3(livingentity.getX(), livingentity.getY(0.5D), livingentity.getZ());
-                if (AngelEntity.this.getBoundingBox().inflate((double)0.2F).intersects(livingentity.getBoundingBox())) {
+                if (AngelEntity.this.getBoundingBox().inflate(0.2F).intersects(livingentity.getBoundingBox())) {
                     AngelEntity.this.doHurtTarget(livingentity);
                     AngelEntity.this.attackPhase = AttackPhase.CIRCLE;
                     if (!AngelEntity.this.isSilent()) {
@@ -537,12 +532,12 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
         }
     }
 
-    public void startSeenByPlayer(ServerPlayer p_31483_) {
+    public void startSeenByPlayer(@NotNull ServerPlayer p_31483_) {
         super.startSeenByPlayer(p_31483_);
         this.bossEvent.addPlayer(p_31483_);
     }
 
-    public void stopSeenByPlayer(ServerPlayer p_31488_) {
+    public void stopSeenByPlayer(@NotNull ServerPlayer p_31488_) {
         super.stopSeenByPlayer(p_31488_);
         this.bossEvent.removePlayer(p_31488_);
     }

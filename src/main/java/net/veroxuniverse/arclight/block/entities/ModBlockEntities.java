@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.veroxuniverse.arclight.ArclightMod;
 import net.veroxuniverse.arclight.init.BlocksInit;
 
+@SuppressWarnings("ConstantConditions")
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ArclightMod.MODID);

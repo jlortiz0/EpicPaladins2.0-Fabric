@@ -19,6 +19,7 @@ import net.veroxuniverse.arclight.util.ArclightModCreativeTabs;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class BlocksInit {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, ArclightMod.MODID);

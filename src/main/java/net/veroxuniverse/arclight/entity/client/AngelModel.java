@@ -24,7 +24,7 @@ public class AngelModel extends AnimatedGeoModel<AngelEntity> {
         return new ResourceLocation(ArclightMod.MODID, "animations/angel.animation.json");
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked" })
     @Override
     public void setLivingAnimations(AngelEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
         super.setLivingAnimations(entity, uniqueID, customPredicate);
@@ -36,5 +36,4 @@ public class AngelModel extends AnimatedGeoModel<AngelEntity> {
             head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
         }
     }
-
 }
