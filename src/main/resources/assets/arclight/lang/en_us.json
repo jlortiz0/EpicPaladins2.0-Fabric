@@ -13,12 +13,7 @@
   "item.arclight.moonlight_crystal": "Moonlight",
   "item.arclight.moonlight_ingot": "Moonlight Alloy",
   "item.arclight.angel_feather": "Angel's Feather",
-  /*
-  "item.arclight.moonlight_jellyball": "Moonlight Jelly",
-  "item.arclight.moonlight_crystalized": "Moonlight Crystal",
-  "item.arclight.heart": "Scorpion Heart",
-  "item.arclight.scorpion_scale": "Scorpion Scale",
-  */
+
   "item.arclight.cryorium_gem": "Cryorium",
   "item.arclight.cryorium_ingot": "Cryorium Alloy",
   "item.arclight.arclight_core": "Arclight Core",
@@ -28,8 +23,6 @@
   "item.arclight.jade_core": "Jade Core",
   "item.arclight.sculk_core": "Sculk Core",
   "item.arclight.sculk_ingot": "Sculk Alloy",
-
-  //Blocks
 
   "block.arclight.arclight_ore": "Arclight Ore",
   "block.arclight.deepslate_arclight_ore": "Deepslate Arclight Ore",
@@ -45,12 +38,8 @@
   "block.arclight.deepslate_cryorium_ore": "Deepslate Cryorium Ore",
   "block.arclight.cryorium_block": "Block of Cryorium",
 
-  //Altar3DBlocks
   "block.arclight.pedestal_block": "Deepslate Pedestal",
   "block.arclight.armor_forge": "Paladin Forge",
-
-
-  //ArmorItems
 
   "item.arclight.arclight_helmet": "Arclight Helmet",
   "item.arclight.arclight_chestplate": "Arclight Chestplate",
@@ -93,12 +82,9 @@
   "item.arclight.angel_leggings": "Angel Leggings",
   "item.arclight.angel_boots": "Angel Boots",
 
-  //Entity
   "item.arclight.angel_spawn_egg": "Angel Spawn Egg",
   "item.arclight.angel_spawn": "Arclight Crown",
   "entity.arclight.angel": "Arclight Angel",
-
-  //Tools
 
   "item.arclight.moonlight_pickaxe": "Moonlight Pickaxe",
   "item.arclight.moonlight_axe": "Moonlight Axe",
@@ -130,8 +116,6 @@
   "item.arclight.cryorium_shovel": "Cryorium Shovel",
   "item.arclight.cryorium_hoe": "Cryorium Hoe",
   "item.arclight.cryorium_sword": "Cryorium Sword",
-
-  //CreativeTabs
 
   "itemGroup.arclight_group": "Arclight Weaponry",
   "itemGroup.arclight_resources": "Arclight Resources",

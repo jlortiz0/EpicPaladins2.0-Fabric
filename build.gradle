@@ -22,7 +22,7 @@ plugins {
 
 apply plugin: 'org.spongepowered.mixin'
 
-version = '2.0.6-1.19.2'
+version = '2.0.7-1.19.2'
 group = 'net.veroxuniverse.arclight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'arclight'
 

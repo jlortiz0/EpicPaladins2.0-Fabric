@@ -8,7 +8,7 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class AngelArmorModel extends AnimatedGeoModel<AngelWingItem> {
     @Override
     public ResourceLocation  getModelResource(AngelWingItem object) {
-        return new ResourceLocation(ArclightMod.MODID, "geo/angel_armor.geo.json");
+        return new ResourceLocation(ArclightMod.MODID, "geo/angel_armor_with_wings.geo.json");
     }
 
     @Override
