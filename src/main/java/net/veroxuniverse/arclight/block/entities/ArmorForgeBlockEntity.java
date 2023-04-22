@@ -1,5 +1,6 @@
 package net.veroxuniverse.arclight.block.entities;
 
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

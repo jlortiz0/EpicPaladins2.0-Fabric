@@ -1,5 +1,6 @@
 package net.veroxuniverse.arclight.block.entities;
 
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

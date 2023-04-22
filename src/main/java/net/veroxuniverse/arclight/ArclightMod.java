@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 
-@Mod(ArclightMod.MODID)
 public class ArclightMod {
     public static final  String MODID = "arclight";
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -47,13 +46,6 @@ public class ArclightMod {
         BlocksInit.register(modEventBus);
 
         EntityTypes.register(modEventBus);
-
-        modEventBus.addListener(this::commonSetup);
-        MinecraftForge.EVENT_BUS.register(this);
-
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
 
     }
 
