@@ -4,25 +4,11 @@ import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.client.registry.screen.ClickArea;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.screen.SimpleClickArea;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.plugins.REIPlugin;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.client.Minecraft;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.veroxuniverse.arclight.ArclightMod;
 import net.veroxuniverse.arclight.init.BlocksInit;
 import net.veroxuniverse.arclight.recipe.ArmorForgeRecipe;
@@ -51,11 +37,11 @@ public class JEIArclightPlugin implements REIClientPlugin {
 
     @Override
     public void registerScreens(ScreenRegistry registry) {
-        registry.registerClickArea(ArmorForgeScreen.class, new SimpleClickArea<ArmorForgeScreen>() {
+        registry.registerClickArea(new SimpleClickArea<ArmorForgeScreen>() {
             @Override
             public Rectangle provide(ArmorForgeScreen s) {
                 return new Rectangle(105, 33, 10, 40);
             }
-        });
+        }, ArmorForgeScreen.class);
     }
 }
