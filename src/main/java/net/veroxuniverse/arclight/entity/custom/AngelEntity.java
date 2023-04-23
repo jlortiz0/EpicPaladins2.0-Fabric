@@ -2,6 +2,9 @@ package net.veroxuniverse.arclight.entity.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.World;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -48,7 +52,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 
-public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
+public class AngelEntity extends FlyingEntity implements IAnimatable, HostileEntity {
 
     public int getInvulnerableTicks() {
         return this.entityData.get(DATA_ID_INV);
@@ -72,7 +76,7 @@ public class AngelEntity extends FlyingMob implements IAnimatable, Enemy {
 
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
-    public AngelEntity(EntityType<? extends FlyingMob> entityType, Level level) {
+    public AngelEntity(EntityType<? extends FlyingEntity> entityType, World level) {
         super(entityType, level);
         this.setHealth(this.getMaxHealth());
         this.xpReward = 5;

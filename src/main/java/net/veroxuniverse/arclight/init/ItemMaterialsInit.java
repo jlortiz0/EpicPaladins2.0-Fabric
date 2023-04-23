@@ -2,11 +2,7 @@ package net.veroxuniverse.arclight.init;
 
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Lazy;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.ForgeTier;
 
 import java.util.function.Supplier;
 

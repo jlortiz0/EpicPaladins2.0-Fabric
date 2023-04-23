@@ -1,10 +1,12 @@
 package net.veroxuniverse.arclight.block.entities;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -43,7 +45,7 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
     private  int maxProgress = 900;
 
     public ArmorForgeBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.ARMOR_BLOCK_ENTIY.get(), pos, state);
+        super(ModBlockEntities.ARMOR_BLOCK_ENTIY, pos, state);
         this. data = new ContainerData() {
             @Override
             public int get(int index) {

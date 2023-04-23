@@ -1,6 +1,6 @@
 package net.veroxuniverse.arclight.entity.client;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 import net.veroxuniverse.arclight.ArclightMod;
 import net.veroxuniverse.arclight.entity.custom.AngelEntity;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -10,18 +10,18 @@ import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class AngelModel extends AnimatedGeoModel<AngelEntity> {
     @Override
-    public ResourceLocation getModelResource(AngelEntity object) {
-        return new ResourceLocation(ArclightMod.MODID, "geo/angel.geo.json");
+    public Identifier getModelLocation(AngelEntity object) {
+        return new Identifier(ArclightMod.MODID, "geo/angel.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(AngelEntity object) {
-        return new ResourceLocation(ArclightMod.MODID, "textures/entity/angel/angel.png");
+    public Identifier getTextureLocation(AngelEntity object) {
+        return new Identifier(ArclightMod.MODID, "textures/entity/angel/angel.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(AngelEntity animateable) {
-        return new ResourceLocation(ArclightMod.MODID, "animations/angel.animation.json");
+    public Identifier getAnimationFileLocation(AngelEntity animateable) {
+        return new Identifier(ArclightMod.MODID, "animations/angel.animation.json");
     }
 
     @SuppressWarnings({ "unchecked" })

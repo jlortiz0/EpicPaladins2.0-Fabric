@@ -1,16 +1,17 @@
 package net.veroxuniverse.arclight.item;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.veroxuniverse.arclight.entity.EntityTypes;
 import net.veroxuniverse.arclight.entity.custom.AngelEntity;
 import net.veroxuniverse.arclight.init.BlocksInit;
@@ -20,25 +21,25 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AngelSpawnItem extends Item {
-    public AngelSpawnItem(Properties pProperties) {
+    public AngelSpawnItem(Item.Settings pProperties) {
         super(pProperties);
     }
 
     @Override
-    public @NotNull InteractionResult useOn(UseOnContext pContext) {
+    public @NotNull ActionResult useOnBlock(ItemUsageContext pContext) {
         Block blockBelow = null;
-        if (!pContext.getLevel().isClientSide()) {
-            BlockPos positionClicked = pContext.getClickedPos();
+        if (!pContext.getWorld().isClient) {
+            BlockPos positionClicked = pContext.getBlockPos();
 
             for (int i = 0; i <= positionClicked.getY() + 2; i++) {
-                blockBelow = pContext.getLevel().getBlockState(positionClicked.below(i)).getBlock();
+                blockBelow = pContext.getWorld().getBlockState(positionClicked.down(i)).getBlock();
 
                 if (isValuableBlock(blockBelow)) {
-                    Level level = pContext.getLevel();
-                    AngelEntity spawnAngel = EntityTypes.ANGEL.get().create(level);
+                    World level = pContext.getWorld();
+                    AngelEntity spawnAngel = EntityTypes.ANGEL.create(level);
                     if (spawnAngel != null) {
                         spawnAngel.setPos(positionClicked.getX(), positionClicked.getY() + 15, positionClicked.getZ());
-                        level.addFreshEntity(spawnAngel);
+                        level.spawnEntity(spawnAngel);
                     }
                     break;
                 }
@@ -46,25 +47,25 @@ public class AngelSpawnItem extends Item {
         }
 
         if (isValuableBlock(blockBelow) && pContext.getPlayer() != null) {
-            pContext.getItemInHand().hurtAndBreak(1, pContext.getPlayer(),
-                    (player) -> player.broadcastBreakEvent(player.getUsedItemHand()));
+            pContext.getStack().damage(1, pContext.getPlayer(),
+                    (player) -> player.sendToolBreakStatus(player.getActiveHand()));
         }
 
-        return super.useOn(pContext);
+        return super.useOnBlock(pContext);
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if(Screen.hasShiftDown()) {
-            components.add(Component.literal("Right click on Deepslate Pedestal to summon the Boss!").withStyle(ChatFormatting.DARK_PURPLE));
+            tooltip.add(new LiteralText("Right click on Deepslate Pedestal to summon the Boss!").formatted(Formatting.DARK_PURPLE));
         } else {
-            components.add(Component.literal("Press SHIFT for more info").withStyle(ChatFormatting.DARK_GRAY));
+            tooltip.add(new LiteralText("Press SHIFT for more info").formatted(Formatting.DARK_GRAY));
         }
 
-        super.appendHoverText(stack, level, components, flag);
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     private boolean isValuableBlock(Block block) {
-        return block == BlocksInit.PEDESTAL_BLOCK.get();
+        return block == BlocksInit.PEDESTAL_BLOCK;
     }
 }

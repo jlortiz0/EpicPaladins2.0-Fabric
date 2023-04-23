@@ -25,7 +25,7 @@ public class ArmorForgeBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onRemove(BlockState pState, @NotNull World pLevel, @NotNull BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+    public void onStateReplaced(BlockState pState, @NotNull World pLevel, @NotNull BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()){
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof ArmorForgeBlockEntity) {
@@ -33,7 +33,7 @@ public class ArmorForgeBlock extends BlockWithEntity {
             }
         }
 
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        super.onStateReplaced(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     @Override
@@ -63,7 +63,6 @@ public class ArmorForgeBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return new ArmorForgeBlockEntity(null, state);
-        // return createTickerHelper(type, ModBlockEntities.ARMOR_BLOCK_ENTIY.get(), ArmorForgeBlockEntity::tick);
+        return checkType(type, ModBlockEntities.ARMOR_BLOCK_ENTIY, (world1, pos, state1, be) -> ArmorForgeBlockEntity.tick(world1, pos, state1, be));
     }
 }

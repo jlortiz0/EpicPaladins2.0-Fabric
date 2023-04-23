@@ -12,14 +12,14 @@ public class ArclightModCreativeTabs {
 
     public static final ItemGroup RESOURCES_TAB = FabricItemGroupBuilder.build(
             new Identifier(ArclightMod.MODID, "arclight_resources"),
-            () -> new ItemStack(ItemsInit.ARCLIGHT_GEM.get()));
+            () -> new ItemStack(ItemsInit.ARCLIGHT_GEM));
 
     public static final ItemGroup BUILDING_TAB = FabricItemGroupBuilder.build(
             new Identifier(ArclightMod.MODID, "arclight_building"),
-            () -> new ItemStack(BlocksInit.ARCLIGHT_BLOCK.get()));
+            () -> new ItemStack(BlocksInit.ARCLIGHT_BLOCK));
 
     public static final ItemGroup ARCLIGHT_TAB = FabricItemGroupBuilder.build(
             new Identifier(ArclightMod.MODID, "arclight_tab"),
-            () -> new ItemStack(ItemsInit.ANGEL_SWORD.get()));
+            () -> new ItemStack(ItemsInit.ANGEL_SWORD));
 }
 
