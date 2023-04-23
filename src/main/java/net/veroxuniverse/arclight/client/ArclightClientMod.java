@@ -4,6 +4,7 @@ import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.veroxuniverse.arclight.block.entities.ModBlockEntities;
 import net.veroxuniverse.arclight.client.custom_armors.angel_armor.AngelArmorRenderer;
 import net.veroxuniverse.arclight.client.custom_armors.arclight_armor.ArclightArmorRenderer;
@@ -24,6 +25,8 @@ import net.veroxuniverse.arclight.entity.EntityTypes;
 import net.veroxuniverse.arclight.entity.client.AngelRenderer;
 import net.veroxuniverse.arclight.init.BlocksInit;
 import net.veroxuniverse.arclight.init.ItemsInit;
+import net.veroxuniverse.arclight.screen.ArmorForgeScreen;
+import net.veroxuniverse.arclight.screen.ModMenuTypes;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 public class ArclightClientMod implements ClientModInitializer {
@@ -47,6 +50,8 @@ public class ArclightClientMod implements ClientModInitializer {
         BuiltinItemRendererRegistry.INSTANCE.register(ItemsInit.CRYORIUM_BATTLE_AXE, new CryoriumAxeRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(ItemsInit.MOONLIGHT_GLAIVE, new MoonlightGlaiveRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(ItemsInit.PEDESTAL_BLOCK_ITEM, new PedestalBlockItemRenderer());
+
+        HandledScreens.register(ModMenuTypes.ARMOR_FORGE_MENU, ArmorForgeScreen::new);
     }
 }
 

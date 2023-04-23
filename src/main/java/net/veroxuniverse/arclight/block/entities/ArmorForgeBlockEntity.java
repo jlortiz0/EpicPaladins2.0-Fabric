@@ -1,52 +1,46 @@
 package net.veroxuniverse.arclight.block.entities;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Containers;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraft.world.World;
 import net.veroxuniverse.arclight.recipe.ArmorForgeRecipe;
+import net.veroxuniverse.arclight.recipe.ModRecipes;
 import net.veroxuniverse.arclight.screen.ArmorForgeMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
-public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(4){
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-        }
-    };
+public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, Inventory {
+    private final DefaultedList<ItemStack> itemHandler = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private Optional<DefaultedList<ItemStack>> lazyItemHandler = Optional.empty();
 
-    protected final ContainerData data;
+    protected final PropertyDelegate data;
     private int progress = 0;
-    private  int maxProgress = 900;
+    private int maxProgress = 900;
 
     public ArmorForgeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ARMOR_BLOCK_ENTIY, pos, state);
-        this. data = new ContainerData() {
+        this.data = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch (index) {
@@ -65,84 +59,102 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
             }
 
             @Override
-            public int getCount() {
+            public int size() {
                 return 2;
             }
         };
     }
 
     @Override
-    public @NotNull Component getDisplayName() {
-        return Component.literal("Paladin Forge");
+    public int size() { return itemHandler.size(); }
+
+    @Override
+    public boolean isEmpty() { return itemHandler.stream().allMatch(Predicate.isEqual(ItemStack.EMPTY)); }
+
+    @Override
+    public ItemStack getStack(int slot) { return itemHandler.size() >= slot || slot < 0 ? ItemStack.EMPTY : itemHandler.get(slot); }
+
+    @Override
+    public ItemStack removeStack(int slot, int count) {
+        if (slot >= 0 && slot < itemHandler.size()) {
+            if (count >= itemHandler.get(slot).getCount()) {
+                itemHandler.set(slot, ItemStack.EMPTY);
+                return ItemStack.EMPTY;
+            }
+            itemHandler.get(slot).decrement(count);
+            return itemHandler.get(slot);
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public ItemStack removeStack(int slot) {
+        if (slot >= 0 && slot < itemHandler.size())
+            itemHandler.set(slot, ItemStack.EMPTY);
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public void setStack(int slot, ItemStack stack) {
+        if (slot >= 0 && slot < itemHandler.size())
+            itemHandler.set(slot, stack);
+    }
+
+    @Override
+    public boolean canPlayerUse(PlayerEntity player) {
+        return true;
+    }
+
+    @Override
+    public void clear() { itemHandler.replaceAll((s) -> ItemStack.EMPTY); }
+
+    @Override
+    public @NotNull Text getDisplayName() {
+        return new LiteralText("Paladin Forge");
     }
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
+    public ScreenHandler createMenu(int id, @NotNull PlayerInventory inventory, @NotNull PlayerEntity player) {
         return new ArmorForgeMenu(id, inventory, this, this.data);
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-
-        return super.getCapability(cap, side);
-    }
-
-    @Override
-    public void onLoad(){
-        super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        nbt.put("inventory", itemHandler.serializeNBT());
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        Inventories.writeNbt(nbt, this.itemHandler);
         nbt.putInt("armor_forge.progress", this.progress);
-
-        super.saveAdditional(nbt);
     }
 
     @Override
-    public void load(@NotNull CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        progress = nbt.getInt("armor_forge.progress");
+    public void readNbt(@NotNull NbtCompound nbt) {
+        super.readNbt(nbt);
+        Inventories.readNbt(nbt, this.itemHandler);
+        this.progress = nbt.getInt("armor_forge.progress");
     }
 
     public void drops(){
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        if (this.world == null) return;
+        for (int i = 0; i < itemHandler.size(); i++) {
+            Block.dropStack(this.world, this.pos, itemHandler.get(i));
         }
-
-        if (this.level != null)
-            Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, ArmorForgeBlockEntity pEntity) {
-        if (level.isClientSide) {
+    public static void tick(World level, BlockPos pos, BlockState state, ArmorForgeBlockEntity pEntity) {
+        if (level.isClient) {
             return;
         }
 
         if (hasRecipe(pEntity)) {
             pEntity.progress++;
-            setChanged(level, pos, state);
+            markDirty(level, pos, state);
 
             if (pEntity.progress >= pEntity.maxProgress) {
                 craftItem(pEntity);
             }
         } else {
             pEntity.resetProgress();
-            setChanged(level,pos, state);
+            markDirty(level,pos, state);
         }
 
     }
@@ -153,22 +165,18 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
 
     private static void craftItem(ArmorForgeBlockEntity pEntity) {
 
-        Level level = pEntity.level;
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
-        }
+        World level = pEntity.world;
 
         if (level != null) {
             Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
-                    .getRecipeFor(ArmorForgeRecipe.Type.INSTANCE, inventory, level);
+                    .getFirstMatch(ModRecipes.ARMOR_FORGE_TYPE, pEntity, level);
 
             if (hasRecipe(pEntity) && recipe.isPresent()) {
-                pEntity.itemHandler.extractItem(0, 1, false);
-                pEntity.itemHandler.extractItem(1, 1, false);
-                pEntity.itemHandler.extractItem(2, 1, false);
-                pEntity.itemHandler.setStackInSlot(3, new ItemStack(recipe.get().getResultItem().getItem(),
-                        pEntity.itemHandler.getStackInSlot(3).getCount() + 1));
+                pEntity.itemHandler.get(0).decrement(1);
+                pEntity.itemHandler.get(1).decrement(1);
+                pEntity.itemHandler.get(2).decrement(1);
+                pEntity.itemHandler.set(3, new ItemStack(recipe.get().getOutput().getItem(),
+                        pEntity.itemHandler.get(3).getCount() + 1));
 
                 pEntity.resetProgress();
             }
@@ -176,27 +184,31 @@ public class ArmorForgeBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private static boolean hasRecipe(ArmorForgeBlockEntity pEntity) {
-        Level level = pEntity.level;
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
-        }
+        World level = pEntity.world;
 
         if (level != null) {
             Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
-                    .getRecipeFor(ArmorForgeRecipe.Type.INSTANCE, inventory, level);
+                    .getFirstMatch(ModRecipes.ARMOR_FORGE_TYPE, pEntity, level);
 
-            return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
-                    canInsertIntoOutputSlot(inventory, recipe.get().getResultItem());
+            return recipe.isPresent() && canInsertAmountIntoOutputSlot(pEntity) &&
+                    canInsertIntoOutputSlot(pEntity, recipe.get().getOutput());
         }
         return false;
     }
 
-    private static boolean canInsertIntoOutputSlot(SimpleContainer inventory, ItemStack stack) {
-        return inventory.getItem(3).getItem() == stack.getItem() || inventory.getItem(3).isEmpty();
+    private static boolean canInsertIntoOutputSlot(Inventory inventory, ItemStack stack) {
+        return inventory.getStack(3).getItem() == stack.getItem() || inventory.getStack(3).isEmpty();
     }
 
-    private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
-        return inventory.getItem(3).getMaxStackSize() > inventory.getItem(3).getCount();
+    private static boolean canInsertAmountIntoOutputSlot(Inventory inventory) {
+        return inventory.getStack(3).getMaxCount() > inventory.getStack(3).getCount();
+    }
+
+    public void getSlots(Consumer<Inventory> c) {
+        SimpleInventory inv = new SimpleInventory(itemHandler.size());
+        for (int i = 0; i < itemHandler.size(); i++) {
+            inv.setStack(i, itemHandler.get(i));
+        }
+        c.accept(inv);
     }
 }

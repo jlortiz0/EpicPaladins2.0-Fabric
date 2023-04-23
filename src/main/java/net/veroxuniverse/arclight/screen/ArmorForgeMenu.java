@@ -1,53 +1,51 @@
 package net.veroxuniverse.arclight.screen;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.world.World;
 import net.veroxuniverse.arclight.block.entities.ArmorForgeBlockEntity;
-import net.veroxuniverse.arclight.init.BlocksInit;
 import org.jetbrains.annotations.NotNull;
 
-public class ArmorForgeMenu extends AbstractContainerMenu {
-    public final ArmorForgeBlockEntity blockEntity;
-    private final Level level;
-    private final ContainerData data;
+public class ArmorForgeMenu extends ScreenHandler {
+    public final Inventory blockEntity;
+    private final World level;
+    private final PropertyDelegate data;
 
-    public ArmorForgeMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+    public ArmorForgeMenu(int id, PlayerInventory inv) {
+        this(id, inv, new SimpleInventory(4), null);
     }
 
-    public ArmorForgeMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.ARMOR_FORGE_MENU.get(), id);
-        checkContainerSize(inv, 4);
-        blockEntity = (ArmorForgeBlockEntity) entity;
-        this.level = inv.player.level;
+    public ArmorForgeMenu(int id, PlayerInventory inv, Inventory entity, PropertyDelegate data) {
+        super(ModMenuTypes.ARMOR_FORGE_MENU, id);
+        blockEntity = entity;
+        this.level = inv.player.world;
         this.data = data;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 86, 15));
-            this.addSlot(new SlotItemHandler(handler, 1, 48, 20));
-            this.addSlot(new SlotItemHandler(handler, 2, 48, 40));
-            this.addSlot(new SlotItemHandler(handler, 3, 86, 60));
-        });
-
-        addDataSlots(data);
-
+        this.addSlot(new Slot(entity, 0, 86, 15));
+        this.addSlot(new Slot(entity, 1, 48, 20));
+        this.addSlot(new Slot(entity, 2, 48, 40));
+        this.addSlot(new Slot(entity, 3, 86, 60));
     }
 
     public boolean isCrafting() {
-        return data.get(0) > 0;
+        return data != null && data.get(0) != 0;
     }
 
     public int getScaledProgress() {
+        if (data == null) {
+            return 0;
+        }
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
         int progressArrowSize = 26; // This is the height in pixels of your arrow
@@ -74,10 +72,10 @@ public class ArmorForgeMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
 
     @Override
-    public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
+    public @NotNull ItemStack transferSlot(@NotNull PlayerEntity playerIn, int index) {
         Slot sourceSlot = slots.get(index);
-        if (!sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
-        ItemStack sourceStack = sourceSlot.getItem();
+        if (!sourceSlot.hasStack()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        ItemStack sourceStack = sourceSlot.getStack();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
         // Check if the slot clicked is one of the vanilla container slots
@@ -98,21 +96,30 @@ public class ArmorForgeMenu extends AbstractContainerMenu {
         }
         // If stack size == 0 (the entire stack was moved) set slot contents to null
         if (sourceStack.getCount() == 0) {
-            sourceSlot.set(ItemStack.EMPTY);
+            sourceSlot.setStack(ItemStack.EMPTY);
         } else {
-            sourceSlot.setChanged();
+            sourceSlot.markDirty();
         }
-        sourceSlot.onTake(playerIn, sourceStack);
+        sourceSlot.onTakeItem(playerIn, sourceStack);
         return copyOfSourceStack;
     }
 
-    @Override
-    public boolean stillValid(@NotNull Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, BlocksInit.ARMOR_FORGE.get());
+    private boolean moveItemStackTo(ItemStack source, int from, int to, boolean overflow) {
+        for (int i = from; i < to; i++) {
+            if (canInsertItemIntoSlot(slots.get(i), source, overflow)) {
+                slots.get(i).insertStack(source);
+                return true;
+            }
+        }
+        return false;
     }
 
-    private void addPlayerInventory(Inventory playerInventory) {
+    @Override
+    public boolean canUse(@NotNull PlayerEntity player) {
+        return this.blockEntity.canPlayerUse(player);
+    }
+
+    private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
                 this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
@@ -120,7 +127,7 @@ public class ArmorForgeMenu extends AbstractContainerMenu {
         }
     }
 
-    private void addPlayerHotbar(Inventory playerInventory) {
+    private void addPlayerHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
         }

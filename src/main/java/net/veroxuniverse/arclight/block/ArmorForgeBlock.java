@@ -7,6 +7,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -44,11 +45,9 @@ public class ArmorForgeBlock extends BlockWithEntity {
     @Override
     public @NotNull ActionResult onUse(@NotNull BlockState pState, World pLevel, @NotNull BlockPos pPos, @NotNull PlayerEntity pPlayer, @NotNull Hand pHand, @NotNull BlockHitResult pHit) {
         if (!pLevel.isClient) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if (entity instanceof ArmorForgeBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (ArmorForgeBlockEntity)entity, pPos);
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
+            NamedScreenHandlerFactory factory = pState.createScreenHandlerFactory(pLevel, pPos);
+            if (factory != null) {
+                pPlayer.openHandledScreen(factory);
             }
         }
         return super.onUse(pState, pLevel, pPos, pPlayer, pHand, pHit);
