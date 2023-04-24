@@ -21,8 +21,6 @@ import net.veroxuniverse.arclight.client.custom_items.angel_sword.AngelSwordRend
 import net.veroxuniverse.arclight.client.custom_items.cryorium_axe.CryoriumAxeRenderer;
 import net.veroxuniverse.arclight.client.custom_items.moonlight_glaive.MoonlightGlaiveRenderer;
 import net.veroxuniverse.arclight.client.custom_items.pedestal_block_item.PedestalBlockItemRenderer;
-import net.veroxuniverse.arclight.entity.EntityTypes;
-import net.veroxuniverse.arclight.entity.client.AngelRenderer;
 import net.veroxuniverse.arclight.init.BlocksInit;
 import net.veroxuniverse.arclight.init.ItemsInit;
 import net.veroxuniverse.arclight.screen.ArmorForgeScreen;
@@ -45,7 +43,6 @@ public class ArclightClientMod implements ClientModInitializer {
         GeoArmorRenderer.registerArmorRenderer(new AngelArmorRenderer(), ItemsInit.ANGEL_HELMET, ItemsInit.ANGEL_CHESTPLATE, ItemsInit.ANGEL_LEGGINGS, ItemsInit.ANGEL_BOOTS);
 
         BlockEntityRendererRegistry.register(ModBlockEntities.PEDESTAL_BLOCK_ENTITY, PedestalBlockRenderer::new);
-        EntityRendererRegistry.register(EntityTypes.ANGEL, AngelRenderer::new);
         BuiltinItemRendererRegistry.INSTANCE.register(ItemsInit.ANGEL_SWORD, new AngelSwordRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(ItemsInit.CRYORIUM_BATTLE_AXE, new CryoriumAxeRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(ItemsInit.MOONLIGHT_GLAIVE, new MoonlightGlaiveRenderer());

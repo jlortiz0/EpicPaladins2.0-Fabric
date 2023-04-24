@@ -6,7 +6,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.veroxuniverse.arclight.ArclightMod;
-import net.veroxuniverse.arclight.entity.EntityTypes;
 import net.veroxuniverse.arclight.item.*;
 import net.veroxuniverse.arclight.util.ArclightModCreativeTabs;
 
@@ -84,10 +83,6 @@ public class ItemsInit {
 
     public static final Item ANGEL_FEATHER = registerItem("angel_feather",
             () -> new Item(new Item.Settings().group(ArclightModCreativeTabs.RESOURCES_TAB)));
-    public static final Item ANGEL_SPAWN = registerItem("angel_spawn",
-            () -> new AngelSpawnItem(new Item.Settings().group(ArclightModCreativeTabs.RESOURCES_TAB).maxDamage(1).rarity(Rarity.RARE)));
-    public static final Item ANGEL_SPAWN_EGG = registerItem("angel_spawn_egg",
-            () -> new SpawnEggItem(EntityTypes.ANGEL, 0xE1EF05, 0x6FF2FA,new Item.Settings().group(ItemGroup.MISC)));
 
 
  //Armor
