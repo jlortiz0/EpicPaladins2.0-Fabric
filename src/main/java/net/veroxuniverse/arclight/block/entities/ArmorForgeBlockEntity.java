@@ -10,6 +10,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -18,6 +19,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.veroxuniverse.arclight.ArclightMod;
 import net.veroxuniverse.arclight.recipe.ArmorForgeRecipe;
 import net.veroxuniverse.arclight.recipe.ModRecipes;
 import net.veroxuniverse.arclight.screen.ArmorForgeMenu;
@@ -29,10 +31,8 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, Inventory {
-    private final DefaultedList<ItemStack> itemHandler = DefaultedList.ofSize(4, ItemStack.EMPTY);
-
-    private Optional<DefaultedList<ItemStack>> lazyItemHandler = Optional.empty();
+public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
+    private final SimpleInventory itemHandler = new SimpleInventory(4);
 
     protected final PropertyDelegate data;
     private int progress = 0;
@@ -65,48 +65,7 @@ public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHan
         };
     }
 
-    @Override
-    public int size() { return itemHandler.size(); }
-
-    @Override
-    public boolean isEmpty() { return itemHandler.stream().allMatch(Predicate.isEqual(ItemStack.EMPTY)); }
-
-    @Override
-    public ItemStack getStack(int slot) { return itemHandler.size() >= slot || slot < 0 ? ItemStack.EMPTY : itemHandler.get(slot); }
-
-    @Override
-    public ItemStack removeStack(int slot, int count) {
-        if (slot >= 0 && slot < itemHandler.size()) {
-            if (count >= itemHandler.get(slot).getCount()) {
-                itemHandler.set(slot, ItemStack.EMPTY);
-                return ItemStack.EMPTY;
-            }
-            itemHandler.get(slot).decrement(count);
-            return itemHandler.get(slot);
-        }
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ItemStack removeStack(int slot) {
-        if (slot >= 0 && slot < itemHandler.size())
-            itemHandler.set(slot, ItemStack.EMPTY);
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public void setStack(int slot, ItemStack stack) {
-        if (slot >= 0 && slot < itemHandler.size())
-            itemHandler.set(slot, stack);
-    }
-
-    @Override
-    public boolean canPlayerUse(PlayerEntity player) {
-        return true;
-    }
-
-    @Override
-    public void clear() { itemHandler.replaceAll((s) -> ItemStack.EMPTY); }
+    public Inventory getInventory() { return this.itemHandler; };
 
     @Override
     public @NotNull Text getDisplayName() {
@@ -116,27 +75,27 @@ public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHan
     @Nullable
     @Override
     public ScreenHandler createMenu(int id, @NotNull PlayerInventory inventory, @NotNull PlayerEntity player) {
-        return new ArmorForgeMenu(id, inventory, this, this.data);
+        return new ArmorForgeMenu(id, inventory, this.itemHandler, this.data);
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, this.itemHandler);
+        nbt.put("Items", this.itemHandler.toNbtList());
         nbt.putInt("armor_forge.progress", this.progress);
     }
 
     @Override
     public void readNbt(@NotNull NbtCompound nbt) {
         super.readNbt(nbt);
-        Inventories.readNbt(nbt, this.itemHandler);
+        this.itemHandler.readNbtList((NbtList) nbt.get("Items"));
         this.progress = nbt.getInt("armor_forge.progress");
     }
 
     public void drops(){
         if (this.world == null) return;
         for (int i = 0; i < itemHandler.size(); i++) {
-            Block.dropStack(this.world, this.pos, itemHandler.get(i));
+            Block.dropStack(this.world, this.pos, itemHandler.getStack(i));
         }
     }
 
@@ -169,14 +128,14 @@ public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHan
 
         if (level != null) {
             Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
-                    .getFirstMatch(ModRecipes.ARMOR_FORGE_TYPE, pEntity, level);
+                    .getFirstMatch(ArclightMod.ARMOR_FORGE_TYPE, pEntity.getInventory(), level);
 
             if (hasRecipe(pEntity) && recipe.isPresent()) {
-                pEntity.itemHandler.get(0).decrement(1);
-                pEntity.itemHandler.get(1).decrement(1);
-                pEntity.itemHandler.get(2).decrement(1);
-                pEntity.itemHandler.set(3, new ItemStack(recipe.get().getOutput().getItem(),
-                        pEntity.itemHandler.get(3).getCount() + 1));
+                pEntity.itemHandler.getStack(0).decrement(1);
+                pEntity.itemHandler.getStack(1).decrement(1);
+                pEntity.itemHandler.getStack(2).decrement(1);
+                pEntity.itemHandler.setStack(3, new ItemStack(recipe.get().getOutput().getItem(),
+                        pEntity.itemHandler.getStack(3).getCount() + 1));
 
                 pEntity.resetProgress();
             }
@@ -188,10 +147,10 @@ public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHan
 
         if (level != null) {
             Optional<ArmorForgeRecipe> recipe = level.getRecipeManager()
-                    .getFirstMatch(ModRecipes.ARMOR_FORGE_TYPE, pEntity, level);
+                    .getFirstMatch(ArclightMod.ARMOR_FORGE_TYPE, pEntity.getInventory(), level);
 
-            return recipe.isPresent() && canInsertAmountIntoOutputSlot(pEntity) &&
-                    canInsertIntoOutputSlot(pEntity, recipe.get().getOutput());
+            return recipe.isPresent() && canInsertAmountIntoOutputSlot(pEntity.getInventory()) &&
+                    canInsertIntoOutputSlot(pEntity.getInventory(), recipe.get().getOutput());
         }
         return false;
     }
@@ -202,13 +161,5 @@ public class ArmorForgeBlockEntity extends BlockEntity implements NamedScreenHan
 
     private static boolean canInsertAmountIntoOutputSlot(Inventory inventory) {
         return inventory.getStack(3).getMaxCount() > inventory.getStack(3).getCount();
-    }
-
-    public void getSlots(Consumer<Inventory> c) {
-        SimpleInventory inv = new SimpleInventory(itemHandler.size());
-        for (int i = 0; i < itemHandler.size(); i++) {
-            inv.setStack(i, itemHandler.get(i));
-        }
-        c.accept(inv);
     }
 }

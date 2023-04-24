@@ -80,6 +80,11 @@ public class ArmorForgeRecipe implements Recipe<Inventory> {
         private Type() { }
         public static final Type INSTANCE = new Type();
         public static final String ID = "armor_forging";
+
+        @Override
+        public String toString() {
+            return ID;
+        }
     }
 
     public static class Serializer implements RecipeSerializer<ArmorForgeRecipe> {

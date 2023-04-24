@@ -37,11 +37,7 @@ public class JEIArclightPlugin implements REIClientPlugin {
 
     @Override
     public void registerScreens(ScreenRegistry registry) {
-        registry.registerClickArea(new SimpleClickArea<ArmorForgeScreen>() {
-            @Override
-            public Rectangle provide(ArmorForgeScreen s) {
-                return new Rectangle(105, 33, 10, 40);
-            }
-        }, ArmorForgeScreen.class);
+        registry.registerContainerClickArea(new Rectangle(105, 33, 10, 40), ArmorForgeScreen.class,
+                CategoryIdentifier.of(ArclightMod.MODID, "armor_forging"));
     }
 }

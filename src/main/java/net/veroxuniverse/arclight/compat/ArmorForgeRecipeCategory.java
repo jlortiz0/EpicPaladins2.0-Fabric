@@ -1,5 +1,6 @@
 package net.veroxuniverse.arclight.compat;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.DisplayRenderer;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class ArmorForgeRecipeCategory implements DisplayCategory<ArmorForgeRecipeDisplay> {
     public final static CategoryIdentifier<ArmorForgeRecipeDisplay> UID = CategoryIdentifier.of(ArclightMod.MODID, "armor_forging");
-    public static final RecipeType<ArmorForgeRecipe> RECIPE_TYPE = ModRecipes.ARMOR_FORGE_TYPE;
+    public static final RecipeType<ArmorForgeRecipe> RECIPE_TYPE = ArclightMod.ARMOR_FORGE_TYPE;
 
     public final static Identifier TEXTURE =
             new Identifier(ArclightMod.MODID, "textures/gui/armor_forge_gui.png");
@@ -61,12 +62,16 @@ public class ArmorForgeRecipeCategory implements DisplayCategory<ArmorForgeRecip
     @Override
     public List<Widget> setupDisplay(ArmorForgeRecipeDisplay recipe, Rectangle bounds) {
         List<Widget> widgets = new ArrayList<>();
-        widgets.add(Widgets.createRecipeBase(bounds));
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(176, 85)));
+        widgets.add(Widgets.createRecipeBase(new Rectangle(bounds.x, bounds.y, 176, 85)));
+        // widgets.add(Widgets.createTexturedWidget(TEXTURE, bounds.x + 36, bounds.y + 4, 36, 4, 88, 78));
+        widgets.add(Widgets.createDrawableWidget(((helper, matrices, mouseX, mouseY, delta) -> {
+            RenderSystem.setShaderTexture(0, TEXTURE);
+            helper.drawTexture(matrices, bounds.x + 36, bounds.y + 4, 36, 4, 88, 78);
+        })));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 15)).entries(recipe.getInputEntries().get(0)).markInput());
         widgets.add(Widgets.createSlot(new Point(bounds.x + 48, bounds.y + 20)).entries(recipe.getInputEntries().get(1)).markInput());
         widgets.add(Widgets.createSlot(new Point(bounds.x + 48, bounds.y + 40)).entries(recipe.getInputEntries().get(2)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 40)).entries(recipe.getOutputEntries().get(0)).markOutput());
+        widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 60)).entries(recipe.getOutputEntries().get(0)).markOutput());
         return widgets;
     }
 }

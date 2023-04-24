@@ -48,7 +48,7 @@ public class ArmorForgeBlock extends BlockWithEntity {
                 pPlayer.openHandledScreen(factory);
             }
         }
-        return super.onUse(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        return ActionResult.SUCCESS;
     }
 
     @Nullable

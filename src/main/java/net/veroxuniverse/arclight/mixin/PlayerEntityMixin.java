@@ -13,9 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
-    @Shadow public abstract Iterable<ItemStack> getArmorItems();
 
-    @Inject(method="checkFallFlying", at=@At("TAIL"), cancellable = true)
+    @Inject(method="checkFallFlying", at=@At("RETURN"), cancellable = true)
     private void checkAngelWing(CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValueZ()) return;
         if (ArmorUtils.hasCorrectArmorOn(ArmorMaterialsInit.ANGEL, (PlayerEntity) (Object) this)) {
