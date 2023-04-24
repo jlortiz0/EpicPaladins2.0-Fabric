@@ -22,4 +22,8 @@ public class ArmorForgeRecipeDisplay extends BasicDisplay {
     public ArmorForgeRecipeDisplay(List<EntryIngredient> inputs, List<EntryIngredient> output, Optional<Identifier> loc) {
         super(inputs, output, loc);
     }
+
+    public static BasicDisplay.Serializer<ArmorForgeRecipeDisplay> serializer() {
+        return BasicDisplay.Serializer.ofSimple(ArmorForgeRecipeDisplay::new);
+    }
 }

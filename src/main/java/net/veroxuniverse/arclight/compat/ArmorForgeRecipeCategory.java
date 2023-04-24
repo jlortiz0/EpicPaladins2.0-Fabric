@@ -62,16 +62,20 @@ public class ArmorForgeRecipeCategory implements DisplayCategory<ArmorForgeRecip
     @Override
     public List<Widget> setupDisplay(ArmorForgeRecipeDisplay recipe, Rectangle bounds) {
         List<Widget> widgets = new ArrayList<>();
-        widgets.add(Widgets.createRecipeBase(new Rectangle(bounds.x, bounds.y, 176, 85)));
-        // widgets.add(Widgets.createTexturedWidget(TEXTURE, bounds.x + 36, bounds.y + 4, 36, 4, 88, 78));
-        widgets.add(Widgets.createDrawableWidget(((helper, matrices, mouseX, mouseY, delta) -> {
+        widgets.add(Widgets.createRecipeBase(bounds));
+        widgets.add(Widgets.createDrawableWidget((helper, matrices, mouseX, mouseY, delta) -> {
             RenderSystem.setShaderTexture(0, TEXTURE);
-            helper.drawTexture(matrices, bounds.x + 36, bounds.y + 4, 36, 4, 88, 78);
-        })));
+            helper.drawTexture(matrices, bounds.x + 115, bounds.y + 23, 105, 33, 10, 26);
+            int j = (int) ((System.currentTimeMillis() / 4500.0) % 1.0 * 26.0);
+            if (j < 0) {
+                j = 0;
+            }
+            helper.drawTexture(matrices, bounds.x + 115, bounds.y + 23, 176, 0, 8, j);
+        }));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 15)).entries(recipe.getInputEntries().get(0)).markInput());
         widgets.add(Widgets.createSlot(new Point(bounds.x + 48, bounds.y + 20)).entries(recipe.getInputEntries().get(1)).markInput());
         widgets.add(Widgets.createSlot(new Point(bounds.x + 48, bounds.y + 40)).entries(recipe.getInputEntries().get(2)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 60)).entries(recipe.getOutputEntries().get(0)).markOutput());
+        widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 40)).entries(recipe.getOutputEntries().get(0)).markOutput());
         return widgets;
     }
 }

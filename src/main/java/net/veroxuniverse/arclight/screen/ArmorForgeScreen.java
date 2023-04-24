@@ -41,6 +41,6 @@ public class ArmorForgeScreen extends AbstractInventoryScreen<ArmorForgeMenu> {
     public void render(@NotNull MatrixStack pPoseStack, int mouseX, int mouseY, float delta) {
         renderBackground(pPoseStack);
         super.render(pPoseStack, mouseX, mouseY, delta);
-        // renderTooltip(pPoseStack, mouseX, mouseY);
+        this.drawMouseoverTooltip(pPoseStack, mouseX, mouseY);
     }
 }

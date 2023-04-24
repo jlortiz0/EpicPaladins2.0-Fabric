@@ -7,6 +7,7 @@ import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.screen.SimpleClickArea;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.util.Identifier;
 import net.veroxuniverse.arclight.ArclightMod;
@@ -38,6 +39,11 @@ public class JEIArclightPlugin implements REIClientPlugin {
     @Override
     public void registerScreens(ScreenRegistry registry) {
         registry.registerContainerClickArea(new Rectangle(105, 33, 10, 40), ArmorForgeScreen.class,
-                CategoryIdentifier.of(ArclightMod.MODID, "armor_forging"));
+                ArmorForgeRecipeCategory.UID);
+    }
+
+    @Override
+    public void registerDisplaySerializer(DisplaySerializerRegistry registry) {
+        registry.register(ArmorForgeRecipeCategory.UID, ArmorForgeRecipeDisplay.serializer());
     }
 }
