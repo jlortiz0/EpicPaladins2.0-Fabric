@@ -12,46 +12,45 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 
 public enum ArmorMaterialsInit implements ArmorMaterial {
-
-    ARCLIGHT("arclight", 45, new int[]{6, 10, 13, 6}, 25,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> Ingredient.ofItems(ItemsInit.ARCLIGHT_INGOT)),
-
-    ANGEL("angel", -1, new int[]{7, 12, 15, 7}, 30,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 7.0F, 0.5F,
-            () -> Ingredient.ofItems(ItemsInit.ANGEL_FEATHER)),
-
-    CRYO("cryo", 45, new int[]{6, 10, 13, 6}, 25,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> Ingredient.ofItems(ItemsInit.CRYORIUM_INGOT)),
-
-    MOONLIGHT("moonlight", 45, new int[]{6, 10, 13, 6}, 25,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> Ingredient.ofItems(ItemsInit.MOONLIGHT_INGOT)),
-
-    SHADOW("shadow", 45, new int[]{4, 7, 9, 3}, 25,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> Ingredient.ofItems(ItemsInit.MOONLIGHT_INGOT)),
-
-    JADE("jade", 45, new int[]{6, 10, 13, 6}, 25,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
-            () -> Ingredient.ofItems(ItemsInit.JADE_INGOT)),
-
-    SCULK("sculk", 50, new int[]{6, 10, 13, 6}, 25,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 5.0F, 0.3F,
-            () -> Ingredient.ofItems(ItemsInit.SCULK_INGOT)),
-
-    SCORPIONSCALE("scorpionscale", 50, new int[]{6, 10, 13, 6}, 25,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 5.0F, 0.3F,
-            () -> Ingredient.ofItems(ItemsInit.BLOODSTONE_INGOT)),
-
     COPPER("copper", 30, new int[]{3, 6, 8, 3}, 25,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2.0F, 0.2F,
             () -> Ingredient.ofItems(Items.COPPER_INGOT)),
 
     STEEL("steel", 30, new int[]{3, 6, 8, 3}, 25,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2.0F, 0.2F,
-            () -> Ingredient.ofItems(Items.IRON_INGOT));
+            () -> Ingredient.ofItems(Items.IRON_INGOT)),
+
+    ARCLIGHT("arclight", 45, new int[]{4, 8, 10, 4}, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.2F,
+            () -> Ingredient.ofItems(ItemsInit.ARCLIGHT_INGOT)),
+
+    CRYO("cryo", 45, new int[]{5, 9, 11, 5}, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.2F,
+            () -> Ingredient.ofItems(ItemsInit.CRYORIUM_INGOT)),
+
+    BLOODSTONE("bloodstone", 50, new int[]{5, 9, 11, 5}, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.2F,
+            () -> Ingredient.ofItems(ItemsInit.BLOODSTONE_INGOT)),
+
+    MOONLIGHT("moonlight", 45, new int[]{6, 10, 13, 6}, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
+            () -> Ingredient.ofItems(ItemsInit.MOONLIGHT_INGOT)),
+
+    SHADOW("shadow", 45, new int[]{6, 10, 13, 6}, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
+            () -> Ingredient.ofItems(ItemsInit.MOONLIGHT_INGOT)),
+
+    JADE("jade", 50, new int[]{7, 12, 14, 7}, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 5.0F, 0.3F,
+            () -> Ingredient.ofItems(ItemsInit.JADE_INGOT)),
+
+    SCULK("sculk", 50, new int[]{6, 10, 13, 6}, 25,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.3F,
+            () -> Ingredient.ofItems(ItemsInit.SCULK_INGOT)),
+
+    ANGEL("angel", -1, new int[]{7, 12, 15, 7}, 30,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 7.0F, 0.5F,
+            () -> Ingredient.ofItems(ItemsInit.ANGEL_FEATHER));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;

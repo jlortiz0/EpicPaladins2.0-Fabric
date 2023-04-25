@@ -12,7 +12,7 @@ public enum ItemMaterialsInit implements ToolMaterial {
             () -> Ingredient.ofItems(ItemsInit.ARCLIGHT_INGOT)),
     JADE(4, 2500, 12.0f,5.0f, 25,
             () -> Ingredient.ofItems(ItemsInit.JADE_INGOT)),
-    MOONLIGHT(4, 1700, 10.0f,5.0f, 25,
+    MOONLIGHT(4, 2500, 12.0f,5.0f, 25,
             () -> Ingredient.ofItems(ItemsInit.MOONLIGHT_INGOT)),
     BLOODSTONE(4, 2500, 12.0f,4.5f, 24,
             () -> Ingredient.ofItems(ItemsInit.BLOODSTONE_INGOT)),

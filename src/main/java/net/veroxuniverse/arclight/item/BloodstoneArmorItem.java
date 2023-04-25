@@ -1,18 +1,14 @@
 package net.veroxuniverse.arclight.item;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.veroxuniverse.arclight.init.ArmorMaterialsInit;
 import net.veroxuniverse.arclight.util.ArmorUtils;
 import software.bernie.example.item.GeckoArmorItem;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -23,20 +19,17 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.Map;
 import java.util.Set;
 
-import static net.veroxuniverse.arclight.util.ArmorUtils.*;
-
-public class ScorpionArmorItem extends GeckoArmorItem implements IAnimatable {
+public class BloodstoneArmorItem extends GeckoArmorItem implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
     private static final Set<StatusEffectInstance> EFFECT_SET =
             (new ImmutableSet.Builder<StatusEffectInstance>())
                     .add(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 200, 1, false, false))
-                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 1, false, false)).build();
+                    .add(new StatusEffectInstance(StatusEffects.HASTE, 200, 1, false, false)).build();
 
-    public ScorpionArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
+    public BloodstoneArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
         super(material, slot, settings);
     }
 

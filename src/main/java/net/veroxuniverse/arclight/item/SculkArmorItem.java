@@ -33,7 +33,7 @@ public class SculkArmorItem extends GeckoArmorItem implements IAnimatable {
 
     private static final Set<StatusEffectInstance> EFFECT_SET =
             (new ImmutableSet.Builder<StatusEffectInstance>())
-                    .add(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 200, 1, false, false))
+                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 2, false, false))
                     .add(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 200, 1, false, false)).build();
 
     public SculkArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {

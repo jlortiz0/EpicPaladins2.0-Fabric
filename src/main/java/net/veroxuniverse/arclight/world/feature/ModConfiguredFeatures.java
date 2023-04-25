@@ -5,10 +5,8 @@ import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreConfiguredFeatures;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.gen.feature.*;
 import net.veroxuniverse.arclight.ArclightMod;
 import net.veroxuniverse.arclight.init.BlocksInit;
 
@@ -43,22 +41,16 @@ public class ModConfiguredFeatures {
 
     //SPECIFY ORES
 
-    public static final ConfiguredFeature<?, ?> ARCLIGHT_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_ARCLIGHT_ORES,9));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ARCLIGHT_ORE = ConfiguredFeatures.register("arclight_ore", Feature.ORE, new OreFeatureConfig(OVERWORLD_ARCLIGHT_ORES,9));
 
-    public static final ConfiguredFeature<?, ?> CRYORIUM_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_CRYORIUM_ORES,9));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> CRYORIUM_ORE = ConfiguredFeatures.register("cryorium_ore", Feature.ORE, new OreFeatureConfig(OVERWORLD_CRYORIUM_ORES,9));
     
-    public static final ConfiguredFeature<?, ?> BLOODSTONE_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_BLOODSTONE_ORES,9));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> BLOODSTONE_ORE = ConfiguredFeatures.register("bloodstone_ore", Feature.ORE, new OreFeatureConfig(OVERWORLD_BLOODSTONE_ORES,9));
     
-    public static final ConfiguredFeature<?, ?> END_JADE_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(END_JADE_ORES,9));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> END_JADE_ORE = ConfiguredFeatures.register("end_jade_ore", Feature.ORE, new OreFeatureConfig(END_JADE_ORES,9));
 
-    public static final ConfiguredFeature<?, ?> NETHER_MOONLIGHT_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(NETHER_MOONLIGHT_ORES,9));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> NETHER_MOONLIGHT_ORE = ConfiguredFeatures.register("nether_moonlight_ore", Feature.ORE, new OreFeatureConfig(NETHER_MOONLIGHT_ORES,9));
 
     public static void register() {
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "arclight_ore"), ARCLIGHT_ORE);
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "cryorium_ore"), CRYORIUM_ORE);
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "bloodstone_ore"), BLOODSTONE_ORE);
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "end_jade_ore"), END_JADE_ORE);
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "nether_moonlight_ore"), NETHER_MOONLIGHT_ORE);
-
     }
 }

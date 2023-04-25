@@ -12,8 +12,13 @@ targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { url 'https://maven.shedaniel.me' }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
@@ -30,7 +35,6 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version")
     // at runtime, use the full JEI jar for Forge
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version")
-
 }
 
 processResources {
