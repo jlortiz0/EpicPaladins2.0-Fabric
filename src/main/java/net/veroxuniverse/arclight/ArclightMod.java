@@ -29,6 +29,7 @@ public class ArclightMod implements ModInitializer {
             Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(ArclightMod.MODID, "armor_forging"), ArmorForgeRecipe.Serializer.INSTANCE);
 
     public void onInitialize() {
+        ItemsInit.register();
         GeckoLib.initialize();
         ModConfiguredFeatures.register();
         ModPlacedFeatures.register();
