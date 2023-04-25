@@ -43,19 +43,22 @@ public class ModConfiguredFeatures {
 
     //SPECIFY ORES
 
-    public static final ConfiguredFeature<?, ?> ARCLIGHT_ORE = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "arclight_ore"),
-            new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_ARCLIGHT_ORES,9)));
+    public static final ConfiguredFeature<?, ?> ARCLIGHT_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_ARCLIGHT_ORES,9));
 
-    public static final ConfiguredFeature<?, ?> CRYORIUM_ORE = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "cryorium_ore"),
-            new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_CRYORIUM_ORES,9)));
+    public static final ConfiguredFeature<?, ?> CRYORIUM_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_CRYORIUM_ORES,9));
     
-    public static final ConfiguredFeature<?, ?> BLOODSTONE_ORE = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "bloodstone_ore"),
-            new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_BLOODSTONE_ORES,9)));
+    public static final ConfiguredFeature<?, ?> BLOODSTONE_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(OVERWORLD_BLOODSTONE_ORES,9));
     
-    public static final ConfiguredFeature<?, ?> END_JADE_ORE = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "end_jade_ore"),
-            new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(END_JADE_ORES,9)));
+    public static final ConfiguredFeature<?, ?> END_JADE_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(END_JADE_ORES,9));
 
-    public static final ConfiguredFeature<?, ?> NETHER_MOONLIGHT_ORE = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "nether_moonlight_ore"),
-            new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(NETHER_MOONLIGHT_ORES,9)));
+    public static final ConfiguredFeature<?, ?> NETHER_MOONLIGHT_ORE = new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(NETHER_MOONLIGHT_ORES,9));
 
+    public static void register() {
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "arclight_ore"), ARCLIGHT_ORE);
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "cryorium_ore"), CRYORIUM_ORE);
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "bloodstone_ore"), BLOODSTONE_ORE);
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "end_jade_ore"), END_JADE_ORE);
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ArclightMod.MODID, "nether_moonlight_ore"), NETHER_MOONLIGHT_ORE);
+
+    }
 }

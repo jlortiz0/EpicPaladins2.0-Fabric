@@ -27,7 +27,7 @@ public enum ItemMaterialsInit implements ToolMaterial {
     private final float attackDamage;
     private final int enchantability;
     private final Lazy<Ingredient> repairIngredient;
-    private ItemMaterialsInit(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
+    ItemMaterialsInit(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;

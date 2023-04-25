@@ -16,32 +16,27 @@ public class ModPlacedFeatures {
 
     //OVERWORLD
 
-    public static final PlacedFeature ARCLIGHT_ORE_PLACED = Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "arclight_ore_placed"),
-            new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.ARCLIGHT_ORE),
+    public static final PlacedFeature ARCLIGHT_ORE_PLACED = new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.ARCLIGHT_ORE),
                     commonOrePlacement(1, // VeinsPerChunk
-                            HeightRangePlacementModifier.trapezoid(YOffset.BOTTOM, YOffset.aboveBottom(94)))));
+                            HeightRangePlacementModifier.trapezoid(YOffset.BOTTOM, YOffset.aboveBottom(94))));
 
-    public static final PlacedFeature BLOODSTONE_ORE_PLACED = Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "bloodstone_ore_placed"),
-            new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.BLOODSTONE_ORE),
+    public static final PlacedFeature BLOODSTONE_ORE_PLACED = new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.BLOODSTONE_ORE),
                     commonOrePlacement(1, // VeinsPerChunk
-                            HeightRangePlacementModifier.trapezoid(YOffset.BOTTOM, YOffset.aboveBottom(94)))));
+                            HeightRangePlacementModifier.trapezoid(YOffset.BOTTOM, YOffset.aboveBottom(94))));
 
-    public static final PlacedFeature CRYORIUM_ORE_PLACED = Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "cryorium_ore_placed"),
-            new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.CRYORIUM_ORE),
+    public static final PlacedFeature CRYORIUM_ORE_PLACED = new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.CRYORIUM_ORE),
                     commonOrePlacement(1, // VeinsPerChunk
-                            HeightRangePlacementModifier.trapezoid(YOffset.BOTTOM, YOffset.aboveBottom(94)))));
+                            HeightRangePlacementModifier.trapezoid(YOffset.BOTTOM, YOffset.aboveBottom(94))));
 
     //END
 
-    public static final PlacedFeature END_JADE_ORE_PLACED = Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "end_jade_ore_placed"),
-            new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.END_JADE_ORE), commonOrePlacement(2, // VeinsPerChunk
-                    HeightRangePlacementModifier.uniform(YOffset.aboveBottom(10), YOffset.aboveBottom(140)))));
+    public static final PlacedFeature END_JADE_ORE_PLACED = new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.END_JADE_ORE), commonOrePlacement(2, // VeinsPerChunk
+                    HeightRangePlacementModifier.uniform(YOffset.aboveBottom(10), YOffset.aboveBottom(140))));
 
     //NETHER
 
-    public static final PlacedFeature NETHER_MOONLIGHT_ORE_PLACED = Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "nether_moonlight_ore_placed"),
-            new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.NETHER_MOONLIGHT_ORE), commonOrePlacement(2, // VeinsPerChunk
-                    HeightRangePlacementModifier.uniform(YOffset.aboveBottom(30), YOffset.aboveBottom(80)))));
+    public static final PlacedFeature NETHER_MOONLIGHT_ORE_PLACED = new PlacedFeature(RegistryEntry.of(ModConfiguredFeatures.NETHER_MOONLIGHT_ORE), commonOrePlacement(2, // VeinsPerChunk
+                    HeightRangePlacementModifier.uniform(YOffset.aboveBottom(30), YOffset.aboveBottom(80))));
 
 
 
@@ -57,5 +52,14 @@ public class ModPlacedFeatures {
 
     public static List<PlacementModifier> rareOrePlacement(int chance, PlacementModifier height) {
         return orePlacement(RarityFilterPlacementModifier.of(chance), height);
+    }
+
+    public static void register() {
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "arclight_ore"), ARCLIGHT_ORE_PLACED);
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "bloodstone_ore"), BLOODSTONE_ORE_PLACED);
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "cyrorium_ore"), CRYORIUM_ORE_PLACED);
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "end_jade_ore"), END_JADE_ORE_PLACED);
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ArclightMod.MODID, "nether_moonlight_ore"), NETHER_MOONLIGHT_ORE_PLACED);
+
     }
 }
