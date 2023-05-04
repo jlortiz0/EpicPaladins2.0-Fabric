@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class ArmorForgeRecipeDisplay extends BasicDisplay {
     @Override
-    public CategoryIdentifier<ArmorForgeRecipeDisplay> getCategoryIdentifier() { return ArmorForgeRecipeCategory.UID; }
+    public CategoryIdentifier<? extends ArmorForgeRecipeDisplay> getCategoryIdentifier() { return ArmorForgeRecipeCategory.UID; }
 
     public ArmorForgeRecipeDisplay(ArmorForgeRecipe recipe) {
         this(EntryIngredients.ofIngredients(recipe.getIngredients()), Collections.singletonList(EntryIngredients.of(recipe.getOutput())), Optional.ofNullable(recipe.getId()));

@@ -11,6 +11,8 @@ import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
+import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.text.LiteralText;
@@ -27,18 +29,16 @@ import java.util.Collections;
 import java.util.List;
 
 public class ArmorForgeRecipeCategory implements DisplayCategory<ArmorForgeRecipeDisplay> {
-    public final static CategoryIdentifier<ArmorForgeRecipeDisplay> UID = CategoryIdentifier.of(ArclightMod.MODID, "armor_forging");
+    public final static CategoryIdentifier<? extends ArmorForgeRecipeDisplay> UID = CategoryIdentifier.of(ArclightMod.MODID, "armor_forging");
     public static final RecipeType<ArmorForgeRecipe> RECIPE_TYPE = ArclightMod.ARMOR_FORGE_TYPE;
 
     public final static Identifier TEXTURE =
             new Identifier(ArclightMod.MODID, "textures/gui/armor_forge_gui.png");
 
     // private final IDrawable background;
-    private final EntryStack icon;
+    private static final EntryStack icon = EntryStacks.of(BlocksInit.ARMOR_FORGE);
 
     public ArmorForgeRecipeCategory() {
-        // this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(BlocksInit.ARMOR_FORGE));
     }
 
     @Override
@@ -48,11 +48,11 @@ public class ArmorForgeRecipeCategory implements DisplayCategory<ArmorForgeRecip
 
     @Override
     public @NotNull EntryStack getIcon() {
-        return this.icon;
+        return icon;
     }
 
     @Override
-    public @NotNull CategoryIdentifier<ArmorForgeRecipeDisplay> getCategoryIdentifier() { return UID; }
+    public @NotNull CategoryIdentifier<? extends ArmorForgeRecipeDisplay> getCategoryIdentifier() { return UID; }
 
     @Override
     public DisplayRenderer getDisplayRenderer(ArmorForgeRecipeDisplay recipe) {
@@ -60,22 +60,25 @@ public class ArmorForgeRecipeCategory implements DisplayCategory<ArmorForgeRecip
     }
 
     @Override
+    public int getDisplayHeight() { return 86; }
+
+    @Override
     public List<Widget> setupDisplay(ArmorForgeRecipeDisplay recipe, Rectangle bounds) {
         List<Widget> widgets = new ArrayList<>();
         widgets.add(Widgets.createRecipeBase(bounds));
+        widgets.add(Widgets.createTexturedWidget(TEXTURE, bounds.x + 44, bounds.y + 4, 44, 4, 72, 76));
         widgets.add(Widgets.createDrawableWidget((helper, matrices, mouseX, mouseY, delta) -> {
             RenderSystem.setShaderTexture(0, TEXTURE);
-            helper.drawTexture(matrices, bounds.x + 115, bounds.y + 23, 105, 33, 10, 26);
             int j = (int) ((System.currentTimeMillis() / 4500.0) % 1.0 * 26.0);
             if (j < 0) {
                 j = 0;
             }
-            helper.drawTexture(matrices, bounds.x + 115, bounds.y + 23, 176, 0, 8, j);
+            helper.drawTexture(matrices, bounds.x + 105, bounds.y + 33, 176, 0, 8, j);
         }));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 15)).entries(recipe.getInputEntries().get(0)).markInput());
         widgets.add(Widgets.createSlot(new Point(bounds.x + 48, bounds.y + 20)).entries(recipe.getInputEntries().get(1)).markInput());
         widgets.add(Widgets.createSlot(new Point(bounds.x + 48, bounds.y + 40)).entries(recipe.getInputEntries().get(2)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 40)).entries(recipe.getOutputEntries().get(0)).markOutput());
+        widgets.add(Widgets.createSlot(new Point(bounds.x + 86, bounds.y + 60)).entries(recipe.getOutputEntries().get(0)).markOutput());
         return widgets;
     }
 }

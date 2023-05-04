@@ -28,12 +28,12 @@ public class JEIArclightPlugin implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registration) {
         registration.add(new ArmorForgeRecipeCategory());
-        CategoryRegistry.getInstance().addWorkstations(CategoryIdentifier.of(ArclightMod.MODID, BlocksInit.ARMOR_FORGE.getTranslationKey()), EntryStacks.of(BlocksInit.ARMOR_FORGE));
+        registration.addWorkstations(ArmorForgeRecipeCategory.UID, EntryStacks.of(BlocksInit.ARMOR_FORGE));
     }
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registry.registerFiller(ArmorForgeRecipe.class, (recipe) -> recipe instanceof ArmorForgeRecipe, r -> new ArmorForgeRecipeDisplay(r));
+        registry.registerFiller(ArmorForgeRecipe.class, ArmorForgeRecipeDisplay::new);
     }
 
     @Override
@@ -44,6 +44,6 @@ public class JEIArclightPlugin implements REIClientPlugin {
 
     @Override
     public void registerDisplaySerializer(DisplaySerializerRegistry registry) {
-        registry.register(ArmorForgeRecipeCategory.UID, ArmorForgeRecipeDisplay.serializer());
+        // registry.register(ArmorForgeRecipeCategory.UID, ArmorForgeRecipeDisplay.serializer());
     }
 }
