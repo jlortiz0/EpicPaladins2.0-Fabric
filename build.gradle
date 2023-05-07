@@ -35,6 +35,7 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version")
     // at runtime, use the full JEI jar for Forge
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version")
+    modCompileOnly("curse.maven:show-me-your-skin-622010:3989217")
 }
 
 processResources {
