@@ -26,8 +26,8 @@ public class BloodstoneArmorItem extends GeckoArmorItem implements IAnimatable {
 
     private static final Set<StatusEffectInstance> EFFECT_SET =
             (new ImmutableSet.Builder<StatusEffectInstance>())
-                    .add(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 200, 1, false, false))
-                    .add(new StatusEffectInstance(StatusEffects.HASTE, 200, 1, false, false)).build();
+                    .add(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 200, 0, false, false))
+                    .add(new StatusEffectInstance(StatusEffects.HASTE, 200, 0, false, false)).build();
 
     public BloodstoneArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
         super(material, slot, settings);

@@ -33,7 +33,7 @@ public class ShadowArmorItem extends GeckoArmorItem implements IAnimatable {
 
     private static final Set<StatusEffectInstance> EFFECT_SET =
             (new ImmutableSet.Builder<StatusEffectInstance>())
-                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 1, false, false))
+                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 0, false, false))
                     .add(new StatusEffectInstance(StatusEffects.SPEED, 200, 0, false, false)).build();
 
     public ShadowArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {

@@ -33,7 +33,7 @@ public class JadeArmorItem extends GeckoArmorItem implements IAnimatable {
 
     private static final Set<StatusEffectInstance> EFFECT_SET =
             (new ImmutableSet.Builder<StatusEffectInstance>())
-                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 1, false, false))
+                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 0, false, false))
                     .add(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 200, 4, false, false)).build();
 
     public JadeArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {

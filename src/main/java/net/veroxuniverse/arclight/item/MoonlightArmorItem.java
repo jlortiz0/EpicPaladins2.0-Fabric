@@ -33,8 +33,8 @@ public class MoonlightArmorItem extends GeckoArmorItem implements IAnimatable {
 
     private static final Set<StatusEffectInstance> EFFECT_SET =
             (new ImmutableSet.Builder<StatusEffectInstance>())
-                    .add(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 200, 1, false, false))
-                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 1, false, false)).build();
+                    .add(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 200, 0, false, false))
+                    .add(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 0, false, false)).build();
 
     public MoonlightArmorItem(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
         super(material, slot, settings);
