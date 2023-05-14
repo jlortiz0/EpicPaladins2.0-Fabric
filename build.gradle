@@ -19,6 +19,10 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven {
+        name = "Jamieswhiteshirt"
+        url "https://maven.jamieswhiteshirt.com/libs-release/"
+    }
 }
 
 dependencies {
@@ -35,7 +39,10 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version")
     // at runtime, use the full JEI jar for Forge
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version")
-    modCompileOnly("curse.maven:show-me-your-skin-622010:3989217")
+    modImplementation("curse.maven:show-me-your-skin-622010:3989217")
+
+    // Reach Entity Attributes: additional entity attributes for reach distance and attack range
+    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:${project.entity_attributes_version}"))
 }
 
 processResources {
@@ -61,6 +68,7 @@ loom {
             runDir "build/datagen"
         }
     }
+    accessWidenerPath = file("src/main/resources/arclight.accesswidener")
 }
 
 //
