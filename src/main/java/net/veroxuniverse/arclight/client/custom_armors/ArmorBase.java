@@ -5,8 +5,6 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
-import net.veroxuniverse.arclight.client.custom_armors.angel_armor.AngelArmorModel;
-import net.veroxuniverse.arclight.item.AngelWingItem;
 import nl.enjarai.showmeyourskin.config.ArmorConfig;
 import nl.enjarai.showmeyourskin.config.ModConfig;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -22,30 +20,22 @@ public class ArmorBase<T extends ArmorItem & IAnimatable> extends GeoArmorRender
 
         this.headBone = "armorHead";
         this.bodyBone = "armorBody";
-        this.rightArmBone = "armorLeftArm";
-        this.leftArmBone = "armorRightArm";
-        this.rightLegBone = "armorLeftLeg";
-        this.leftLegBone = "armorRightLeg";
-        this.rightBootBone = "armorLeftBoots";
-        this.leftBootBone = "armorRightBoots";
+        this.rightArmBone = "armorRightArm";
+        this.leftArmBone = "armorLeftArm";
+        this.rightLegBone = "armorRightLeg";
+        this.leftLegBone = "armorLeftLeg";
+        this.rightBootBone = "armorRightBoots";
+        this.leftBootBone = "armorLeftBoots";
 
     }
 
     @Override
     public void render(MatrixStack stack, VertexConsumerProvider bufferIn, int packedLightIn) {
-        if (getRenderColor(currentArmorItem, 0, stack, bufferIn, null, packedLightIn).getAlpha() == 0) {
+        if (getRenderColor(currentArmorItem, 0, stack, bufferIn, null, packedLightIn).getAlpha() < 5) {
             return;
         }
         super.render(stack, bufferIn, packedLightIn);
     }
-
-//    @Override
-//    public void render(float partialTicks, MatrixStack stack, VertexConsumer bufferIn, int packedLightIn) {
-//        if (getRenderColor(currentArmorItem, partialTicks, stack, null, bufferIn, packedLightIn).getAlpha() == 0) {
-//            return;
-//        }
-//        super.render(partialTicks, stack, bufferIn, packedLightIn);
-//    }
 
     @Override
     public Color getRenderColor(T animatable, float partialTick, MatrixStack poseStack,
@@ -61,15 +51,6 @@ public class ArmorBase<T extends ArmorItem & IAnimatable> extends GeoArmorRender
     public RenderLayer getRenderType(T animatable, float partialTick, MatrixStack poseStack,
                                      @Nullable VertexConsumerProvider bufferSource, @Nullable VertexConsumer buffer, int packedLight,
                                      Identifier texture) {
-        RenderLayer.MultiPhaseParameters multiPhaseParameters = RenderLayer.MultiPhaseParameters.builder()
-                .shader(RenderLayer.ENTITY_TRANSLUCENT_SHADER)
-                .texture(new RenderPhase.Texture(texture, false, false))
-                .transparency(RenderLayer.TRANSLUCENT_TRANSPARENCY)
-                // .writeMaskState(RenderLayer.COLOR_MASK)
-                .cull(RenderLayer.DISABLE_CULLING)
-                .lightmap(RenderLayer.ENABLE_LIGHTMAP)
-                .target(RenderPhase.OUTLINE_TARGET)
-                .build(true);
-        return RenderLayer.of("entity_translucent", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, true, true, multiPhaseParameters);
+        return RenderLayer.getArmorCutoutNoCull(texture);
     }
 }
