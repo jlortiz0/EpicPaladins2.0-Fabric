@@ -6,6 +6,6 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 public class ArclightArmorRenderer extends ArmorBase<ArclightArmorItem> {
     public ArclightArmorRenderer() {
-        super(new ArclightArmorModel());
+        super(new ArclightArmorModel(), true);
     }
 }

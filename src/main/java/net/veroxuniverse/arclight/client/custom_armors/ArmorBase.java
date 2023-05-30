@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 
 public class ArmorBase<T extends ArmorItem & IAnimatable> extends GeoArmorRenderer<T> {
     public ArmorBase(AnimatedGeoModel<T> modelProvider) {
-        super(modelProvider);
+        this(modelProvider, false);
 
         this.headBone = "armorHead";
         this.bodyBone = "armorBody";
@@ -26,6 +26,20 @@ public class ArmorBase<T extends ArmorItem & IAnimatable> extends GeoArmorRender
         this.leftLegBone = "armorLeftLeg";
         this.rightBootBone = "armorRightBoots";
         this.leftBootBone = "armorLeftBoots";
+
+    }
+
+    public ArmorBase(AnimatedGeoModel<T> modelProvider, boolean reversed) {
+        super(modelProvider);
+
+        this.headBone = "armorHead";
+        this.bodyBone = "armorBody";
+        this.rightArmBone = reversed ? "armorLeftArm" : "armorRightArm";
+        this.leftArmBone = reversed ? "armorRightArm" : "armorLeftArm";
+        this.rightLegBone = reversed ? "armorLeftLeg" : "armorRightLeg";
+        this.leftLegBone = reversed ? "armorRightLeg" : "armorLeftLeg";
+        this.rightBootBone = reversed ? "armorLeftBoots" : "armorRightBoots";
+        this.leftBootBone = reversed ? "armorRightBoots" : "armorLeftBoots";
 
     }
 

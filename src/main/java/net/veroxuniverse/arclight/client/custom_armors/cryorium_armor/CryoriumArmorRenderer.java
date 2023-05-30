@@ -6,6 +6,6 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 public class CryoriumArmorRenderer extends ArmorBase<CryoArmorItem> {
     public CryoriumArmorRenderer() {
-        super(new CryoriumArmorModel());
+        super(new CryoriumArmorModel(), true);
     }
 }

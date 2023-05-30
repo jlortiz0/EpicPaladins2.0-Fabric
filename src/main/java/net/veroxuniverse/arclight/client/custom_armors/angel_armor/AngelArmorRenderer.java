@@ -11,16 +11,7 @@ import javax.annotation.Nullable;
 
 public class AngelArmorRenderer extends ArmorBase<AngelWingItem> {
     public AngelArmorRenderer() {
-        super(new AngelArmorModel());
-
-        this.headBone = "armorHead";
-        this.bodyBone = "armorBody";
-        this.rightArmBone = "armorLeftArm";
-        this.leftArmBone = "armorRightArm";
-        this.rightLegBone = "armorLeftLeg";
-        this.leftLegBone = "armorRightLeg";
-        this.rightBootBone = "armorLeftBoots";
-        this.leftBootBone = "armorRightBoots";
+        super(new AngelArmorModel(), true);
     }
 
     @Override

@@ -7,6 +7,6 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 public class SteelKnightArmorRenderer extends ArmorBase<SteelArmorItem> {
     public SteelKnightArmorRenderer() {
-        super(new SteelKnightArmorModel());
+        super(new SteelKnightArmorModel(), true);
     }
 }
